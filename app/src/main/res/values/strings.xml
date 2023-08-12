@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GrandTheftRadio</string>
+    <string name="bottom_nav_title_favorites">Favorites</string>
+    <string name="bottom_nav_title_2d">2D</string>
+    <string name="bottom_nav_title_3d">3D</string>
+    <string name="bottom_nav_title_hd">HD</string>
+    <string name="bottom_nav_title_import">Import</string>
+    <string name="favorites_fragment_placeholder">Favorites</string>
+    <string name="stations_fragment_placeholder">Stations</string>
+    <string name="import_fragment_placeholder">Import fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="import_title">Import</string>
+    <string name="stations_title">Stations</string>
+    <string name="favorites_title">Favorites</string>
+</resources>

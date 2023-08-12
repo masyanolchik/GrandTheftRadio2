@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_menu"
+    app:startDestination="@id/fav_dest">
+
+    <fragment
+        android:id="@+id/fav_dest"
+        android:name="com.masyanolchik.grandtheftradio2.favorites.FavoritesFragment"
+        android:label="@string/favorites_title"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/import_dest"
+        android:name="com.masyanolchik.grandtheftradio2.assetimport.ImportFragment"
+        android:label="@string/import_title"
+        tools:layout="@layout/fragment_import" />
+    <fragment
+        android:id="@+id/stations_dest"
+        android:name="com.masyanolchik.grandtheftradio2.stations.StationsFragment"
+        android:label="@string/stations_title"
+        tools:layout="@layout/fragment_stations" >
+        <argument
+            android:name="eraName"
+            app:argType="string"
+            android:defaultValue='"2D"' />
+    </fragment>
+</navigation>
