@@ -7,10 +7,15 @@
     <string name="bottom_nav_title_import">Import</string>
     <string name="favorites_fragment_placeholder">Favorites</string>
     <string name="stations_fragment_placeholder">Stations</string>
-    <string name="import_fragment_placeholder">Import fragment</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="copy_template_to_downloads">Copy template to downloads</string>
+    <string name="import_template_from_storage">Import template from storage</string>
     <string name="import_title">Import</string>
     <string name="stations_title">Stations</string>
     <string name="favorites_title">Favorites</string>
+    <string name="template_is_in_your_downloads_folder">Template is in your Downloads folder</string>
+    <string name="write_file_permission_ratio">We need write permission in order to copy a template file into your Download folder.</string>
+    <string name="grant_permission_action">GRANT PERMISSION</string>
+    <string name="read_file_permission_ratio">We need read permission in order to parse your edited template</string>
+    <string name="import_tree_success">Successfully imported your template</string>
+    <string name="import_tree_error">Error has happened: %1$s</string>
 </resources>
