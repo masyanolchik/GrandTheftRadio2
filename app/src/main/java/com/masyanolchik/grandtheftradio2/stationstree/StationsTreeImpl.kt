@@ -24,7 +24,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
-class StationsTreeImpl(private val repository: StationsRepository, coroutineScope: CoroutineScope, private val appContext: Context): StationsTree {
+class StationsTreeImpl(
+    private val repository: StationsRepository,
+    coroutineScope: CoroutineScope,
+    private val appContext: Context
+): StationsTree {
     init {
         coroutineScope.launch {
             repository.getAllStations()

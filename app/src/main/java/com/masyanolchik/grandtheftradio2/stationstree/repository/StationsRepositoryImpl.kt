@@ -9,7 +9,6 @@ import com.masyanolchik.grandtheftradio2.db.station.fromDomain
 import com.masyanolchik.grandtheftradio2.db.station.toDomain
 import com.masyanolchik.grandtheftradio2.domain.Station
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 import com.masyanolchik.grandtheftradio2.domain.Result
 import kotlinx.coroutines.flow.flowOf
@@ -22,7 +21,7 @@ class StationsRepositoryImpl(private val stationsDao: StationsDao): StationsRepo
             games.forEach { stationsDao.addGame(it.fromDomain()) }
             stationsDao.addSongs(songs.map { it.fromDomain() })
             stationsDao.addLocalSongPrevNext(songs.map { it.fromPrevNextDomain() })
-            stations.forEach {station ->
+            stations.forEach { station ->
                 val localStation = station.fromDomain()
                 stationsDao.addStation(localStation)
                 station.songs.forEach {

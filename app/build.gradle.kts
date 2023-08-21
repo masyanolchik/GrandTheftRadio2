@@ -46,6 +46,7 @@ dependencies {
     val coroutinesVersion = "1.7.1"
     val robolectricVersion = "4.10.3"
     val truthVersion = "1.1.4"
+    val mockitoVersion = "5.4.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -69,6 +70,9 @@ dependencies {
     // For exposing and controlling media sessions
     implementation("androidx.media3:media3-session:$media3Version")
     testImplementation("junit:junit:4.13.2")
+    implementation("org.mockito:mockito-core:$mockitoVersion")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
+
     testImplementation("org.robolectric:robolectric:$robolectricVersion")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     testImplementation ("com.google.truth:truth:$truthVersion")
