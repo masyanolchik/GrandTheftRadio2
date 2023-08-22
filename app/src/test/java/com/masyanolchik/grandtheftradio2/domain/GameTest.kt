@@ -3,9 +3,16 @@ package com.masyanolchik.grandtheftradio2.domain
 import androidx.media3.common.MediaMetadata
 import com.google.common.truth.Truth.assertThat
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
+import org.junit.After
 import org.junit.Test
+import org.koin.core.context.stopKoin
 
 class GameTest {
+    @After
+    fun stopApp() {
+        stopKoin()
+    }
+
     @Test
     fun testGame_implementsStationsTreeItem() {
         val game = Game(

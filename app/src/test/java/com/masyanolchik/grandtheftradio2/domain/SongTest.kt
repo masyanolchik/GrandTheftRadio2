@@ -5,11 +5,18 @@ import androidx.media3.common.MediaMetadata
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 
 @RunWith(AndroidJUnit4::class)
 class SongTest {
+    @After
+    fun stopApp() {
+        stopKoin()
+    }
+
     @Test
     fun testSong_implementsStationsTreeItem() {
         val song = Song(

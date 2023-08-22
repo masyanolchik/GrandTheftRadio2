@@ -23,15 +23,19 @@ class AssetImportPresenter constructor(
                         is Result.Completed -> {
                             assetImportContractView?.hideImportProgress(
                                 assetImportContractView?.getString(
-                                    R.string.import_tree_success,
+                                    R.string.import_tree_success
                                 )?: "")
                         }
-                        is Result.Error -> {
-                            assetImportContractView?.hideImportProgress(
-                                assetImportContractView?.getString(R.string.import_tree_error, result.throwable.toString())?: ""
-                            )
+                        else -> {
+                            if(result is Result.Error) {
+                                assetImportContractView?.hideImportProgress(
+                                    assetImportContractView?.getString(
+                                        R.string.import_tree_error,
+                                        result.throwable.toString()
+                                    )?: ""
+                                )
+                            }
                         }
-                        else -> throw IllegalStateException("This shouldn't have happened")
                     }
                 }
         }

@@ -14,9 +14,9 @@ import java.lang.Exception
 
 class AssetImportModel(private val stationsTree: StationsTree): AssetImportContract.Model {
     override suspend fun buildMediaTreeFromStationsList(serializedString: String): Flow<Result<Nothing>> {
-        val listStationType = object : TypeToken<List<Station>>() {}.type
-        val stationsList = Gson().fromJson<List<Station>>(serializedString, listStationType)
         return try {
+            val listStationType = object : TypeToken<List<Station>>() {}.type
+            val stationsList = Gson().fromJson<List<Station>>(serializedString, listStationType)
             stationsTree.reinitialize(stationsList)
             flowOf(Result.Completed())
         } catch (ex: Exception) {

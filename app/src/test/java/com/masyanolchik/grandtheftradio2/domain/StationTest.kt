@@ -5,14 +5,21 @@ import android.os.SystemClock
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 import org.robolectric.shadows.ShadowSystemClock
 import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class StationTest {
+
+    @After
+    fun stopApp() {
+        stopKoin()
+    }
 
     @Before
     fun setup() {

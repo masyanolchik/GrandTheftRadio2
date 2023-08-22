@@ -28,6 +28,8 @@ import org.mockito.Mockito.times
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.verify
 import com.masyanolchik.grandtheftradio2.domain.Result
+import org.junit.After
+import org.koin.core.context.stopKoin
 import org.mockito.Mockito.`when`
 
 @RunWith(MockitoJUnitRunner::class)
@@ -35,6 +37,11 @@ class StationsRepositoryImplTest {
 
     private var mockedStationsDao: StationsDao = mock(StationsDao::class.java)
     private var stationsRepositoryImpl = StationsRepositoryImpl(mockedStationsDao)
+
+    @After
+    fun stopApp() {
+        stopKoin()
+    }
 
     @Test
     fun testStationsRepositoryImpl_saveStations_stationsAreAddedWithComplete() = runTest{
@@ -277,17 +284,17 @@ class StationsRepositoryImplTest {
     }
 
     companion object {
-        val GAME_FIRST = Game(
+        private val GAME_FIRST = Game(
             id = 0,
             gameName = "GameName1",
             universe = "2D"
         )
-        val GAME_SECOND = Game(
+        private val GAME_SECOND = Game(
             id = 1,
             gameName = "GameName2",
             universe = "3D"
         )
-        val FIRST_STATION_SONGS_LIST = listOf(
+        private val FIRST_STATION_SONGS_LIST = listOf(
             Song(
                 id = 0,
                 prevSongId = 2,
@@ -325,7 +332,7 @@ class StationsRepositoryImplTest {
                 msTotalLength = 300L
             )
         )
-        val SECOND_STATION_SONGS_LIST = listOf(
+        private val SECOND_STATION_SONGS_LIST = listOf(
             Song(
                 id = 3,
                 prevSongId = 5,
@@ -363,7 +370,7 @@ class StationsRepositoryImplTest {
                 msTotalLength = 100L
             )
         )
-        val FIRST_STATION = Station(
+        private val FIRST_STATION = Station(
             id = 0,
             game = GAME_FIRST,
             name = "station name1",
@@ -371,7 +378,7 @@ class StationsRepositoryImplTest {
             picLink = "",
             songs = FIRST_STATION_SONGS_LIST
         )
-        val SECOND_STATION = Station(
+        private val SECOND_STATION = Station(
             id = 1,
             game = GAME_SECOND,
             name = "station name2",

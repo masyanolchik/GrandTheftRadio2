@@ -35,6 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = "18"
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
