@@ -33,7 +33,6 @@ class AssetImportPresenterTest {
     @Before
     fun setup() {
         assetImportPresenter = AssetImportPresenter(
-            mockedAssetImportView,
             mockedAssetImportModel,
             CoroutineScope(testCoroutineDispatcher)
         )
@@ -42,12 +41,6 @@ class AssetImportPresenterTest {
     @After
     fun stopDi() {
         stopKoin()
-    }
-    @Test
-    fun testAssetImportPresenterTest_processImportedJsonString_showsImportProgress() = runTest {
-        assetImportPresenter.processImportedJsonString(SERIALIZED_STRING)
-
-        verify(mockedAssetImportView, times(1)).showImportProgress()
     }
 
     @Test
@@ -61,7 +54,7 @@ class AssetImportPresenterTest {
         doAnswer {
             hideText = it.arguments[0] as String
             null
-        }.`when`(mockedAssetImportView).hideImportProgress(any())
+        }.`when`(mockedAssetImportView).showImportResultStatus(any())
         `when`(mockedAssetImportModel.buildMediaTreeFromStationsList(any()))
             .thenReturn(flowOf(Result.Completed()))
 
@@ -84,7 +77,7 @@ class AssetImportPresenterTest {
         doAnswer {
             hideText = it.arguments[0] as String
             null
-        }.`when`(mockedAssetImportView).hideImportProgress(any())
+        }.`when`(mockedAssetImportView).showImportResultStatus(any())
         `when`(mockedAssetImportModel.buildMediaTreeFromStationsList(any()))
             .thenReturn(flowOf(Result.Error(Exception(""))))
 
@@ -105,7 +98,7 @@ class AssetImportPresenterTest {
         assetViewFieldBeforeOnDestroy.isAccessible = true
         val assetViewBeforeOnDestroy = assetViewFieldBeforeOnDestroy.get(assetImportPresenter)
 
-        assetImportPresenter.onDestroy()
+        assetImportPresenter.onDetach()
 
         val assetViewFieldAfterOnDestroy =
             assetImportPresenter.javaClass.getDeclaredField("assetImportContractView")

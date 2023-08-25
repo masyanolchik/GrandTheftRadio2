@@ -18,21 +18,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.masyanolchik.grandtheftradio2.R
-import com.masyanolchik.grandtheftradio2.assetimport.model.AssetImportModel
-import com.masyanolchik.grandtheftradio2.assetimport.presenter.AssetImportPresenter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.android.inject
-import org.koin.android.scope.createScope
-import org.koin.core.component.KoinScopeComponent
-import org.koin.core.component.inject
-import org.koin.core.parameter.parametersOf
-import org.koin.core.scope.Scope
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -44,7 +34,7 @@ import java.io.OutputStream
  */
 class ImportFragment : Fragment(), AssetImportContract.View {
 
-    private val assetImportPresenter: AssetImportContract.Presenter by inject { parametersOf(this@ImportFragment) }
+    private val assetImportPresenter: AssetImportContract.Presenter by inject()
 
     private lateinit var progressIndicator: CircularProgressIndicator
     private lateinit var importTemplateButton: MaterialButton
@@ -70,11 +60,13 @@ class ImportFragment : Fragment(), AssetImportContract.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        assetImportPresenter.setView(this)
         return inflater.inflate(R.layout.fragment_import, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         progressIndicator = view.findViewById(R.id.loading_indicator)
 
@@ -103,26 +95,13 @@ class ImportFragment : Fragment(), AssetImportContract.View {
         }
     }
 
-    override fun showImportProgress() {
-        requireActivity().runOnUiThread {
-            copyTemplateButton.isVisible = false
-            importTemplateButton.isVisible = false
-            progressIndicator.isVisible = true
-        }
+    override fun showImportResultStatus(status: String) {
+        Snackbar.make(requireView(),status,Snackbar.LENGTH_SHORT).show()
     }
 
-    override fun hideImportProgress(status: String) {
-        requireActivity().runOnUiThread {
-            progressIndicator.isVisible = false
-            copyTemplateButton.isVisible = true
-            importTemplateButton.isVisible = true
-            Snackbar.make(importTemplateButton,status,Snackbar.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        assetImportPresenter.onDestroy()
+    override fun onDetach() {
+        super.onDetach()
+        assetImportPresenter.onDetach()
     }
 
     private fun chooseFile() {

@@ -83,6 +83,7 @@ dependencies {
     testImplementation ("com.google.truth:truth:$truthVersion")
     testImplementation("androidx.test.ext:junit:1.1.5")
     testImplementation ("androidx.test.ext:junit-ktx:1.1.5")
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
     androidTestImplementation ("com.google.truth:truth:$truthVersion")
     androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

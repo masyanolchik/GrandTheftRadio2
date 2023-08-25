@@ -5,19 +5,19 @@ import kotlinx.coroutines.flow.Flow
 
 interface AssetImportContract {
     interface View {
-        fun showImportProgress()
-
         fun getString(resId: Int): String
 
         fun getString(resId: Int, vararg formatArgs: Any): String
 
-        fun hideImportProgress(status: String)
+        fun showImportResultStatus(status: String)
     }
 
     interface Presenter {
         fun processImportedJsonString(serializedString: String)
 
-        fun onDestroy()
+        fun setView(view: AssetImportContract.View)
+
+        fun onDetach()
     }
 
     interface Model {

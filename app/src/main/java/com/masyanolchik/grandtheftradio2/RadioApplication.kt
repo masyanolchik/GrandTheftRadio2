@@ -24,9 +24,8 @@ class RadioApplication : Application() {
 
     private val assetImportModule = module {
         single<AssetImportContract.Model> { AssetImportModel(get()) }
-        single { params ->
+        single { _ ->
             AssetImportPresenter(
-                params.get(),
                 get(),
                 CoroutineScope(Dispatchers.IO)
             )
