@@ -29,14 +29,14 @@
                 android:id="@+id/leading_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="24dp"
-                android:minWidth="24dp"
+                android:maxWidth="48dp"
+                android:minWidth="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/stationName"
+                android:id="@+id/station_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
@@ -49,8 +49,8 @@
                 android:id="@+id/trailing_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="24dp"
-                android:minWidth="24dp"
+                android:maxWidth="48dp"
+                android:minWidth="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
