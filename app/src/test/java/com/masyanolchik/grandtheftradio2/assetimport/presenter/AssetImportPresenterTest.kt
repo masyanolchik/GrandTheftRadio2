@@ -34,8 +34,10 @@ class AssetImportPresenterTest {
     fun setup() {
         assetImportPresenter = AssetImportPresenter(
             mockedAssetImportModel,
-            CoroutineScope(testCoroutineDispatcher)
+            CoroutineScope(testCoroutineDispatcher),
+            testCoroutineDispatcher
         )
+        assetImportPresenter.setView(mockedAssetImportView)
     }
 
     @After

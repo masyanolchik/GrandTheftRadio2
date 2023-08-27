@@ -2,6 +2,7 @@ package com.masyanolchik.grandtheftradio2.assetimport
 
 import android.app.DownloadManager
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,7 +24,13 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.masyanolchik.grandtheftradio2.R
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.android.scope.createScope
+import org.koin.androidx.scope.fragmentScope
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.scope.Scope
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -32,7 +40,8 @@ import java.io.OutputStream
  * Use the [ImportFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ImportFragment : Fragment(), AssetImportContract.View {
+class ImportFragment : Fragment(), AssetImportContract.View, KoinScopeComponent {
+    override val scope: Scope by lazy { createScope(this) }
 
     private val assetImportPresenter: AssetImportContract.Presenter by inject()
 
@@ -42,8 +51,10 @@ class ImportFragment : Fragment(), AssetImportContract.View {
 
     private var requestPermissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { _ -> }
-    private var requestFileLocationLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+    private lateinit var requestFileLocationLauncher: ActivityResultLauncher<Intent>
+
+    override fun onAttach(context: Context) {
+        requestFileLocationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), get()) { result: ActivityResult ->
             result.data?.let {
                 if(result.resultCode == AppCompatActivity.RESULT_OK) {
                     result.data?.data?.let { uri ->
@@ -55,6 +66,8 @@ class ImportFragment : Fragment(), AssetImportContract.View {
                 }
             }
         }
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,7 +133,7 @@ class ImportFragment : Fragment(), AssetImportContract.View {
     ) {
         val context = requireContext()
         if (!File(Environment.getExternalStoragePublicDirectory(directory), filename).exists()) {
-            var templateOutputStream: OutputStream? = null
+            var templateOutputStream: OutputStream?
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val mediaContentUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
                 val values = ContentValues().apply {

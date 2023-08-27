@@ -52,6 +52,7 @@ dependencies {
     val robolectricVersion = "4.10.3"
     val truthVersion = "1.1.4"
     val mockitoVersion = "5.4.0"
+    val fragmentVersion = "1.5.7"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -78,11 +79,14 @@ dependencies {
     implementation("org.mockito:mockito-core:$mockitoVersion")
     testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
+    testImplementation("io.insert-koin:koin-test:$koinVersion")
     testImplementation("org.robolectric:robolectric:$robolectricVersion")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     testImplementation ("com.google.truth:truth:$truthVersion")
     testImplementation("androidx.test.ext:junit:1.1.5")
     testImplementation ("androidx.test.ext:junit-ktx:1.1.5")
+    testImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    debugImplementation("androidx.fragment:fragment-testing:$fragmentVersion")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
     androidTestImplementation ("com.google.truth:truth:$truthVersion")
     androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
@@ -90,5 +94,4 @@ dependencies {
     androidTestImplementation ("androidx.test.ext:junit-ktx:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation ("androidx.test:core-ktx:1.5.0")
-
 }

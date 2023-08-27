@@ -3,6 +3,7 @@ package com.masyanolchik.grandtheftradio2.assetimport.presenter
 import com.masyanolchik.grandtheftradio2.R
 import com.masyanolchik.grandtheftradio2.assetimport.AssetImportContract
 import com.masyanolchik.grandtheftradio2.domain.Result
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 class AssetImportPresenter constructor(
     private val assetImportContractModel: AssetImportContract.Model,
     private val coroutineScope: CoroutineScope,
+    private val answerDispatcher: CoroutineDispatcher
 ) : AssetImportContract.Presenter {
     private var assetImportContractView: AssetImportContract.View? = null
 
@@ -19,7 +21,7 @@ class AssetImportPresenter constructor(
         coroutineScope.launch {
             assetImportContractModel
                 .buildMediaTreeFromStationsList(serializedString)
-                .flowOn(Dispatchers.Main)
+                .flowOn(answerDispatcher)
                 .collectLatest { result ->
                     when(result) {
                         is Result.Completed -> {
@@ -49,7 +51,5 @@ class AssetImportPresenter constructor(
 
     override fun onDetach() {
         assetImportContractView = null
-        /*assetImportContractView = null
-        appContext = null*/
     }
 }

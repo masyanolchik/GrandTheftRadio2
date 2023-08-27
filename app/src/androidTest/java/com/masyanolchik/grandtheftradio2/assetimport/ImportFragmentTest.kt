@@ -28,6 +28,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.notNullValue
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,14 +37,13 @@ import java.util.concurrent.TimeoutException
 
 
 private const val BASIC_SAMPLE_PACKAGE = "com.masyanolchik.grandtheftradio2"
-private const val IMPORT_BUTTON_TEXT = "Import"
-private const val COPY_TEMPLATE_BUTTON_TEXT = "Copy template to downloads"
-private const val LAUNCH_TIMEOUT = 5000L
+private const val LAUNCH_TIMEOUT = 4000L
 @RunWith(AndroidJUnit4::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ImportFragmentTest {
     private val device: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     private lateinit var context: Context
+
 
     @Before
     fun startImportFragmentScreen() {
@@ -76,6 +76,10 @@ class ImportFragmentTest {
 
     @Test
     fun a_testImportFragment_importTemplate_showsPermissionDialog() {
+        // Revoking permissions
+        device.executeShellCommand("pm reset-permissions")
+        device.executeShellCommand("rm /sdcard/Download/stations_template.json")
+
         onView(allOf(withText(R.string.import_title), withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE))).perform(click())
         onView(withText(R.string.import_template_from_storage)).perform(click())
         assertViewWithTextIsVisible(device, "ALLOW")
@@ -157,7 +161,6 @@ class ImportFragmentTest {
     }
 
     companion object {
-
         fun clickViewWithText(device: UiDevice, text: String) {
             val view = device.findObject(UiSelector().text(text))
             view.click()
