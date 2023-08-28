@@ -17,8 +17,6 @@ import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
 import org.mockito.Mockito.anyInt
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.times
-import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
@@ -94,7 +92,7 @@ class AssetImportPresenterTest {
     }
 
     @Test
-    fun testAssetImportPresenterTest_onDestroy_viewFieldIsNull() {
+    fun testAssetImportPresenterTest_onDetach_viewFieldIsNull() {
         val assetViewFieldBeforeOnDestroy =
             assetImportPresenter.javaClass.getDeclaredField("assetImportContractView")
         assetViewFieldBeforeOnDestroy.isAccessible = true

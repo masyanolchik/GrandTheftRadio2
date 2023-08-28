@@ -6,11 +6,21 @@ import kotlinx.coroutines.flow.Flow
 
 interface StationContract {
     interface View {
+        fun showLoadingProgress()
+
+        fun hideLoadingProgress()
+
+        fun showErrorScreen()
+
         fun updateList(listItems: List<StationsTreeItem>)
     }
 
     interface Presenter {
-        fun prepareItemsForEra(string: String)
+        fun prepareItemsForEra(eraName: String)
+
+        fun setView(view: StationContract.View)
+
+        fun onDetach()
     }
 
     interface Model {
