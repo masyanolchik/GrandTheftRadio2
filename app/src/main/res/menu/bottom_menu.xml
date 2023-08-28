@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/fav_dest"
+        android:id="@+id/fav_dest_menu"
         android:title="@string/bottom_nav_title_favorites"
         android:icon="@drawable/favorite"/>
 
     <item
-        android:id="@+id/twod_dest"
+        android:id="@+id/twod_dest_menu"
         android:title="@string/bottom_nav_title_2d"
         android:icon="@drawable/twod"/>
 
     <item
-        android:id="@+id/threed_dest"
+        android:id="@+id/threed_dest_menu"
         android:title="@string/bottom_nav_title_3d"
         android:icon="@drawable/threed"/>
 
     <item
-        android:id="@+id/hd_dest"
+        android:id="@+id/hd_dest_menu"
         android:title="@string/bottom_nav_title_hd"
         android:icon="@drawable/hd"/>
 
     <item
-        android:id="@+id/import_dest"
+        android:id="@+id/import_dest_menu"
         android:title="@string/bottom_nav_title_import"
         android:icon="@drawable/imp"/>
 

@@ -22,11 +22,13 @@ import androidx.media3.session.MediaLibraryService
 import androidx.media3.session.MediaSession
 import androidx.media3.session.R
 import com.google.common.collect.ImmutableList
-import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import com.masyanolchik.grandtheftradio2.domain.Song
 import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTree
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.guava.asListenableFuture
 import org.koin.android.ext.android.inject
 
 @UnstableApi class PlaybackService: MediaLibraryService() {
@@ -38,6 +40,7 @@ import org.koin.android.ext.android.inject
     private lateinit var player: ExoPlayer
     private lateinit var mediaLibrarySession: MediaLibrarySession
     private val stationsTree: StationsTree by inject()
+    private val coroutineScope: CoroutineScope by inject()
 
     override fun onCreate() {
         super.onCreate()
@@ -103,46 +106,54 @@ import org.koin.android.ext.android.inject
             session: MediaLibrarySession,
             browser: MediaSession.ControllerInfo,
             params: LibraryParams?
-        ): ListenableFuture<LibraryResult<MediaItem>> {
-            params?.extras?.putInt(
-                MediaConstants.EXTRAS_KEY_CONTENT_STYLE_PLAYABLE,
-                MediaConstants.EXTRAS_VALUE_CONTENT_STYLE_GRID_ITEM)
-            if (params != null && params.isRecent) {
-                return Futures.immediateFuture(LibraryResult.ofError(LibraryResult.RESULT_ERROR_NOT_SUPPORTED))
-            }
-            val root = stationsTree.getRoot()?.toMediaItem()
-            return if(root == null) {
-                Futures.immediateFuture(LibraryResult.ofError(LibraryResult.RESULT_ERROR_IO))
-            } else {
-                Futures.immediateFuture(LibraryResult.ofItem(root, params))
-            }
-        }
+        ): ListenableFuture<LibraryResult<MediaItem>> =
+            coroutineScope.async {
+                if (params != null && params.isRecent) {
+                    LibraryResult.ofError(LibraryResult.RESULT_ERROR_NOT_SUPPORTED)
+                } else {
+                    params?.extras?.putInt(
+                        MediaConstants.EXTRAS_KEY_CONTENT_STYLE_PLAYABLE,
+                        MediaConstants.EXTRAS_VALUE_CONTENT_STYLE_GRID_ITEM)
+
+                    val root = stationsTree.getRoot()?.toMediaItem()
+                    if(root == null) {
+                        LibraryResult.ofError(LibraryResult.RESULT_ERROR_IO)
+                    } else {
+                        LibraryResult.ofItem(root, params)
+                    }
+                }
+
+            }.asListenableFuture()
+
+
 
         override fun onGetItem(
             session: MediaLibrarySession,
             browser: MediaSession.ControllerInfo,
             mediaId: String
-        ): ListenableFuture<LibraryResult<MediaItem>> {
-            val item =
-                stationsTree.getItem(mediaId)
-                    ?: return Futures.immediateFuture(
-                        LibraryResult.ofError(LibraryResult.RESULT_ERROR_BAD_VALUE)
-                    )
-            return Futures.immediateFuture(LibraryResult.ofItem(item.toMediaItem(), /* params= */ null))
-        }
+        ): ListenableFuture<LibraryResult<MediaItem>> =
+            coroutineScope.async {
+                val item = stationsTree.getItem(mediaId)
+                if(item == null) {
+                    LibraryResult.ofError(LibraryResult.RESULT_ERROR_BAD_VALUE)
+                } else {
+                    LibraryResult.ofItem(item.toMediaItem(), /* params= */ null)
+                }
+            }.asListenableFuture()
 
         override fun onSubscribe(
             session: MediaLibrarySession,
             browser: MediaSession.ControllerInfo,
             parentId: String,
             params: LibraryParams?
-        ): ListenableFuture<LibraryResult<Void>> {
-            val children =
-                stationsTree.getChildren(parentId)
+        ): ListenableFuture<LibraryResult<Void>> =
+            coroutineScope.async {
+                val children =
+                    stationsTree.getChildren(parentId)
 
-            session.notifyChildrenChanged(browser, parentId, children.size, params)
-            return Futures.immediateFuture(LibraryResult.ofVoid())
-        }
+                session.notifyChildrenChanged(browser, parentId, children.size, params)
+                LibraryResult.ofVoid()
+            }.asListenableFuture()
 
         override fun onGetChildren(
             session: MediaLibrarySession,
@@ -151,12 +162,10 @@ import org.koin.android.ext.android.inject
             page: Int,
             pageSize: Int,
             params: LibraryParams?
-        ): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> {
-            val children =
-                stationsTree.getChildren(parentId)
-
-            return Futures.immediateFuture(LibraryResult.ofItemList(children.map { it.toMediaItem() }, params))
-        }
+        ): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> =
+            coroutineScope.async {
+                LibraryResult.ofItemList(stationsTree.getChildren(parentId).map { it.toMediaItem() }, params)
+            }.asListenableFuture()
 
         override fun onAddMediaItems(
             mediaSession: MediaSession,
@@ -164,24 +173,36 @@ import org.koin.android.ext.android.inject
             mediaItems: MutableList<MediaItem>
         ): ListenableFuture<MutableList<MediaItem>>
         {
-            val currentStation = stationsTree.getItem(mediaItems.first().mediaId) as Station
-            val (song, offset) = currentStation.getCurrentSongWithSeekPosition()
-            currentSong = song
-            currentOffSet = offset
-            currentSongHasBeenSought = false
-            val newChildren = stationsTree
-                .getChildren(mediaItems.first().mediaId)
-                .toMutableList()
-                .map { it as Song}
-            val currentOrderedNewChildren =
-                buildList {
-                    val firstSong = newChildren.first { song == it }
-                    val position = newChildren.indexOf(firstSong)
-                    add(firstSong)
-                    addAll(newChildren.takeLast(newChildren.size-1-position))
-                    addAll(newChildren.take(position))
-                }.map { it.toMediaItem() }.toMutableList()
-            return Futures.immediateFuture(currentOrderedNewChildren)
+            val currentOrderedNewChildrenDeferred = coroutineScope.async {
+                val upcomingMediaItem = stationsTree.getItem(mediaItems.first().mediaId)
+                if(upcomingMediaItem is Station) {
+                    val (song, offset) = upcomingMediaItem.getCurrentSongWithSeekPosition()
+                    currentSong = song
+                    currentOffSet = offset
+                    currentSongHasBeenSought = false
+                    val newChildren = stationsTree
+                        .getChildren(mediaItems.first().mediaId)
+                        .toMutableList()
+                        .map { it as Song }
+
+                    buildList {
+                        val firstSong = newChildren.first { song == it }
+                        val position = newChildren.indexOf(firstSong)
+                        add(firstSong)
+                        addAll(newChildren.takeLast(newChildren.size - 1 - position))
+                        addAll(newChildren.take(position))
+                    }.map { it.toMediaItem() }.toMutableList()
+                } else {
+                    buildList {
+                        if(upcomingMediaItem != null) {
+                            add(upcomingMediaItem.toMediaItem())
+                        }
+                    }.toMutableList()
+                }
+
+            }
+
+            return currentOrderedNewChildrenDeferred.asListenableFuture()
         }
     }
 

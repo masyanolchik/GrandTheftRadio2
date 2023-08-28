@@ -5,10 +5,26 @@
     android:layout_height="match_parent"
     tools:context=".stations.StationsFragment">
 
-    <TextView
-        android:id="@+id/stations_label"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stations_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/stations_fragment_placeholder" />
+        android:layout_marginHorizontal="16dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/station_error_text"
+        android:visibility="gone"/>
 
 </FrameLayout>

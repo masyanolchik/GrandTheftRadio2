@@ -18,4 +18,5 @@
     <string name="read_file_permission_ratio">We need read permission in order to parse your edited template</string>
     <string name="import_tree_success">Successfully imported your template</string>
     <string name="import_tree_error">Error has happened: %1$s</string>
+    <string name="station_error_text">Error has happened during initializing radio stations</string>
 </resources>

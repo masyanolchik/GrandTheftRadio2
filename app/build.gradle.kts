@@ -54,6 +54,7 @@ dependencies {
     val mockitoVersion = "5.4.0"
     val fragmentVersion = "1.5.7"
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
@@ -78,7 +79,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     implementation("org.mockito:mockito-core:$mockitoVersion")
     testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
-
     testImplementation("io.insert-koin:koin-test:$koinVersion")
     testImplementation("org.robolectric:robolectric:$robolectricVersion")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")

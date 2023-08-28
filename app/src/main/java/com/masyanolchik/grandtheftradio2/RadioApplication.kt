@@ -8,12 +8,17 @@ import com.masyanolchik.grandtheftradio2.assetimport.model.AssetImportModel
 import com.masyanolchik.grandtheftradio2.assetimport.presenter.AssetImportPresenter
 import com.masyanolchik.grandtheftradio2.db.LocalDatabase
 import com.masyanolchik.grandtheftradio2.db.station.StationsDao
+import com.masyanolchik.grandtheftradio2.stations.StationContract
+import com.masyanolchik.grandtheftradio2.stations.StationsFragment
+import com.masyanolchik.grandtheftradio2.stations.model.StationModel
+import com.masyanolchik.grandtheftradio2.stations.presenter.StationPresenter
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTree
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeImpl
 import com.masyanolchik.grandtheftradio2.stationstree.repository.StationsRepository
 import com.masyanolchik.grandtheftradio2.stationstree.repository.StationsRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -41,6 +46,18 @@ class RadioApplication : Application() {
         }
     }
 
+    private val stationFragmentScopeModule = module {
+        scope<StationsFragment> {
+            scoped {
+                StationPresenter(
+                    StationModel(get()),
+                    CoroutineScope(Dispatchers.IO),
+                    Dispatchers.Main
+                ) as StationContract.Presenter
+            }
+        }
+    }
+
     private val stationsTreeModule = module {
         single {
             Room.databaseBuilder(get(), LocalDatabase::class.java, LocalDatabase.DB_NAME).build()
@@ -53,6 +70,10 @@ class RadioApplication : Application() {
         single<StationsTree> { StationsTreeImpl(get(), CoroutineScope(Dispatchers.IO), get()) }
     }
 
+    private val playbackServiceModule = module {
+        factory { CoroutineScope(Dispatchers.IO) }
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -62,7 +83,9 @@ class RadioApplication : Application() {
             modules(
                 assetImportModule,
                 stationsTreeModule,
-                importFragmentScopeModule
+                importFragmentScopeModule,
+                stationFragmentScopeModule,
+                playbackServiceModule
             )
         }
     }

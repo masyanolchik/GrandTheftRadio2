@@ -37,7 +37,7 @@ data class Station (
 
     fun getCurrentSongWithSeekPosition(): Pair<Song, Long> {
         val fullDurationMs = songs.first().msTotalLength
-        val currentTime = SystemClock.currentThreadTimeMillis()
+        val currentTime = System.currentTimeMillis()
         val timePassed = currentTime - START_TIME
         val repeatCount = (timePassed.toDouble() / fullDurationMs)
         val currentOffset = ceil(repeatCount % 1 * fullDurationMs).toLong()

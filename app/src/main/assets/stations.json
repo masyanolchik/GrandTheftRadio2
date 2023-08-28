@@ -1,220 +1,217 @@
-[
-    {
+[{
+    "id": "0",
+    "game": {
         "id": "0",
-        "game": {
-            "id": "0",
-            "gameName": "GTA San Andreas",
-            "universe": "3D"
-        },
-        "name": "Radio Los Santos",
-        "genre": "Hip Hop",
-        "tags": [
-            {
-                "tagName": "Hip Hop"
-            },
-            {
-                "tagName": "Rap"
-            },
-            {
-                "tagName": "West Coast"
-            }
-        ],
-        "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-        "songs": [
-            {
-                "id": "0",
-                "prevSongId": "15",
-                "nextSongId": "1",
-                "artist": "Ice Cube",
-                "title": "Today Was A Good Day",
-                "msOffset": "0",
-                "link": "https://www.dropbox.com/scl/fi/5zzkq72x83ru5ann16ji5/Ice-Cube-Check-Yo-Self.mp3?rlkey=ytvnj3m4jnwc4ka2frd5ncmt8&dl=1",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "1",
-                "prevSongId": "0",
-                "nextSongId": "2",
-                "artist": "Ice Cube",
-                "title": "Check Yo Self",
-                "msOffset": "214626",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "2",
-                "prevSongId": "1",
-                "nextSongId": "3",
-                "artist": "Dr.Dre (feat. Snoop Dogg)",
-                "title": "Deep Cover",
-                "msOffset": "434115",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "3",
-                "prevSongId": "2",
-                "nextSongId": "4",
-                "artist": "2Pac (feat. Pogo)",
-                "title": "I Don't Give a fuck",
-                "msOffset": "722217",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "4",
-                "prevSongId": "3",
-                "nextSongId": "5",
-                "artist": "Da Lench Mob",
-                "title": "Guerillas in tha Mist",
-                "msOffset": "1042449",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "5",
-                "prevSongId": "4",
-                "nextSongId": "6",
-                "artist": "Dr.Dre (feat. Snoop Dogg)",
-                "title": "Nuthin' But A 'G' Thang",
-                "msOffset": "1303439",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "6",
-                "prevSongId": "5",
-                "nextSongId": "7",
-                "artist": "Dr.Dre (feat. Snoop Dogg)",
-                "title": "Fuck Wit Dre Day",
-                "msOffset": "1527311",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "7",
-                "prevSongId": "6",
-                "nextSongId": "8",
-                "artist": "Cypress Hill",
-                "title": "How I Could Just Kill A Man",
-                "msOffset": "1840090",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "8",
-                "prevSongId": "7",
-                "nextSongId": "9",
-                "artist": "Compton's Most Wanted",
-                "title": "Hood Took Me Under",
-                "msOffset": "2076013",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "9",
-                "prevSongId": "8",
-                "nextSongId": "10",
-                "artist": "Kid Frost",
-                "title": "La Raza",
-                "msOffset": "2366527",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "10",
-                "prevSongId": "9",
-                "nextSongId": "11",
-                "artist": "Above The Law",
-                "title": "Murder Rap",
-                "msOffset": "2616873",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "11",
-                "prevSongId": "10",
-                "nextSongId": "12",
-                "artist": "N.W.A.",
-                "title": "Express Yourself",
-                "msOffset": "2863343",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "12",
-                "prevSongId": "11",
-                "nextSongId": "13",
-                "artist": "Too $hort",
-                "title": "The Ghetto",
-                "msOffset": "3175006",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "13",
-                "prevSongId": "12",
-                "nextSongId": "14",
-                "artist": "The D.O.C.",
-                "title": "It's Funky Enough",
-                "msOffset": "3395920",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "14",
-                "prevSongId": "13",
-                "nextSongId": "15",
-                "artist": "Eazy-E",
-                "title": "Eazy-Er Said Than Dunn",
-                "msOffset": "3675824",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            },
-            {
-                "id": "15",
-                "prevSongId": "14",
-                "nextSongId": "0",
-                "artist": "N.W.A.",
-                "title": "Alwayz into Somethin'",
-                "msOffset": "3908617",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Radio Los Santos",
-                "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
-                "msTotalLength": "4178173"
-            }
-        ]
+        "gameName": "GTA San Andreas",
+        "universe": "3D"
     },
+    "name": "Radio Los Santos",
+    "genre": "Hip Hop",
+    "tags": [{
+        "tagName": "Hip Hop"
+    },
+        {
+            "tagName": "Rap"
+        },
+        {
+            "tagName": "West Coast"
+        }
+    ],
+    "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+    "songs": [{
+        "id": "0",
+        "prevSongId": "15",
+        "nextSongId": "1",
+        "artist": "Ice Cube",
+        "title": "Today Was A Good Day",
+        "msOffset": "0",
+        "link": "https://www.dropbox.com/scl/fi/5zzkq72x83ru5ann16ji5/Ice-Cube-Check-Yo-Self.mp3?rlkey=ytvnj3m4jnwc4ka2frd5ncmt8&dl=1",
+        "radioName": "Radio Los Santos",
+        "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+        "msTotalLength": "4178173"
+    },
+        {
+            "id": "1",
+            "prevSongId": "0",
+            "nextSongId": "2",
+            "artist": "Ice Cube",
+            "title": "Check Yo Self",
+            "msOffset": "214626",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "2",
+            "prevSongId": "1",
+            "nextSongId": "3",
+            "artist": "Dr.Dre (feat. Snoop Dogg)",
+            "title": "Deep Cover",
+            "msOffset": "434115",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "3",
+            "prevSongId": "2",
+            "nextSongId": "4",
+            "artist": "2Pac (feat. Pogo)",
+            "title": "I Don't Give a fuck",
+            "msOffset": "722217",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "4",
+            "prevSongId": "3",
+            "nextSongId": "5",
+            "artist": "Da Lench Mob",
+            "title": "Guerillas in tha Mist",
+            "msOffset": "1042449",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "5",
+            "prevSongId": "4",
+            "nextSongId": "6",
+            "artist": "Dr.Dre (feat. Snoop Dogg)",
+            "title": "Nuthin' But A 'G' Thang",
+            "msOffset": "1303439",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "6",
+            "prevSongId": "5",
+            "nextSongId": "7",
+            "artist": "Dr.Dre (feat. Snoop Dogg)",
+            "title": "Fuck Wit Dre Day",
+            "msOffset": "1527311",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "7",
+            "prevSongId": "6",
+            "nextSongId": "8",
+            "artist": "Cypress Hill",
+            "title": "How I Could Just Kill A Man",
+            "msOffset": "1840090",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "8",
+            "prevSongId": "7",
+            "nextSongId": "9",
+            "artist": "Compton's Most Wanted",
+            "title": "Hood Took Me Under",
+            "msOffset": "2076013",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "9",
+            "prevSongId": "8",
+            "nextSongId": "10",
+            "artist": "Kid Frost",
+            "title": "La Raza",
+            "msOffset": "2366527",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "10",
+            "prevSongId": "9",
+            "nextSongId": "11",
+            "artist": "Above The Law",
+            "title": "Murder Rap",
+            "msOffset": "2616873",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "11",
+            "prevSongId": "10",
+            "nextSongId": "12",
+            "artist": "N.W.A.",
+            "title": "Express Yourself",
+            "msOffset": "2863343",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "12",
+            "prevSongId": "11",
+            "nextSongId": "13",
+            "artist": "Too $hort",
+            "title": "The Ghetto",
+            "msOffset": "3175006",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "13",
+            "prevSongId": "12",
+            "nextSongId": "14",
+            "artist": "The D.O.C.",
+            "title": "It's Funky Enough",
+            "msOffset": "3395920",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "14",
+            "prevSongId": "13",
+            "nextSongId": "15",
+            "artist": "Eazy-E",
+            "title": "Eazy-Er Said Than Dunn",
+            "msOffset": "3675824",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        },
+        {
+            "id": "15",
+            "prevSongId": "14",
+            "nextSongId": "0",
+            "artist": "N.W.A.",
+            "title": "Alwayz into Somethin'",
+            "msOffset": "3908617",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Radio Los Santos",
+            "picLink": "https://static.wikigta.org/en/images/5/5f/Radio_Los_Santos_logo.png",
+            "msTotalLength": "4178173"
+        }
+    ]
+},
     {
         "id": "1",
         "game": {
@@ -224,26 +221,23 @@
         },
         "name": "The Fergus Buckner Show FM",
         "genre": "Country",
-        "tags": [
-            {
-                "tagName": "Country"
-            }
+        "tags": [{
+            "tagName": "Country"
+        }
         ],
         "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-        "songs": [
-            {
-                "id": "16",
-                "prevSongId": "16",
-                "nextSongId": "16",
-                "artist": "Sideways Hank O'Mally (and The Alabama Bottle Boys)",
-                "title": "The Ballad of Chapped-Lips Calhoun",
-                "msOffset": "0",
-                "link": "TgtYcW6U_NM",
-                "radioName": "The Fergus Buckner Show FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "189384"
-            }
-        ]
+        "songs": [{
+            "id": "16",
+            "prevSongId": "16",
+            "nextSongId": "16",
+            "artist": "Sideways Hank O'Mally (and The Alabama Bottle Boys)",
+            "title": "The Ballad of Chapped-Lips Calhoun",
+            "msOffset": "0",
+            "link": "https://www.dropbox.com/scl/fi/gs6ktbjj6jezzfgmlswtk/Hank-O-Malley-The-Ballad-of-Chapped-Lips-Calhoun.mp3?rlkey=ym7g6vtq7383do363wwhu1gtg&dl=1",
+            "radioName": "The Fergus Buckner Show FM",
+            "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
+            "msTotalLength": "189384"
+        }]
     },
     {
         "id": "2",
@@ -253,11 +247,10 @@
             "universe": "HD"
         },
         "name": "Deadmau5",
-        "genre": "Techno",
-        "tags": [
-            {
-                "tagName": "Electro House"
-            },
+        "genre": "House",
+        "tags": [{
+            "tagName": "Electro House"
+        },
             {
                 "tagName": "Progressive House"
             },
@@ -266,19 +259,18 @@
             }
         ],
         "picLink": "https://static.wikigta.org/nl/images/d/d2/Deadmau5_logo.png",
-        "songs": [
-            {
-                "id": "17",
-                "prevSongId": "26",
-                "nextSongId": "18",
-                "artist": "BSOD",
-                "title": "Oblique",
-                "msOffset": "0",
-                "link": "youtube id or direct https goes here",
-                "radioName": "Deadmau5",
-                "picLink": "https://static.wikigta.org/nl/images/d/d2/Deadmau5_logo.png",
-                "msTotalLength": "1"
-            },
+        "songs": [{
+            "id": "17",
+            "prevSongId": "26",
+            "nextSongId": "18",
+            "artist": "BSOD",
+            "title": "Oblique",
+            "msOffset": "0",
+            "link": "youtube id or direct https goes here",
+            "radioName": "Deadmau5",
+            "picLink": "https://static.wikigta.org/nl/images/d/d2/Deadmau5_logo.png",
+            "msTotalLength": "1"
+        },
             {
                 "id": "18",
                 "prevSongId": "17",
@@ -386,351 +378,6 @@
                 "radioName": "Deadmau5",
                 "picLink": "https://static.wikigta.org/nl/images/d/d2/Deadmau5_logo.png",
                 "msTotalLength": "1"
-            }
-        ]
-    },
-    {
-        "id": "3",
-        "game": {
-            "id": "1",
-            "gameName": "Grand Theft Auto",
-            "universe": "2D"
-        },
-        "name": "Brooklyn Underground FM",
-        "genre": "Techno",
-        "tags": [
-            {
-                "tagName": "Drum 'N' Bass"
-            },
-            {
-                "tagName": "Techno"
-            }
-        ],
-        "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-        "songs": [
-            {
-                "id": "27",
-                "prevSongId": "29",
-                "nextSongId": "28",
-                "artist": "Retrograde",
-                "title": "Benzoate",
-                "msOffset": "0",
-                "link": "oN7N1vwCgPk",
-                "radioName": "Brooklyn Underground FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "522397"
-            },
-            {
-                "id": "28",
-                "prevSongId": "27",
-                "nextSongId": "29",
-                "artist": "Government Listening Post",
-                "title": "E104",
-                "msOffset": "167445",
-                "link": "wZ1YPMHpFSM",
-                "radioName": "Brooklyn Underground FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "522397"
-            },
-            {
-                "id": "29",
-                "prevSongId": "28",
-                "nextSongId": "27",
-                "artist": "Trancefer",
-                "title": "Figiwhiz",
-                "msOffset": "309823",
-                "link": "JmgWXlLa3Hc",
-                "radioName": "Brooklyn Underground FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "522397"
-            }
-        ]
-    },
-    {
-        "id": "4",
-        "game": {
-            "id": "1",
-            "gameName": "Grand Theft Auto",
-            "universe": "2D"
-        },
-        "name": "Head Radio FM",
-        "genre": "Techno",
-        "tags": [
-            {
-                "tagName": "Techno"
-            },
-            {
-                "tagName": "Modern Rock"
-            }
-        ],
-        "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-        "songs": [
-            {
-                "id": "30",
-                "prevSongId": "32",
-                "nextSongId": "31",
-                "artist": "Reality Bubble",
-                "title": "Days Like These",
-                "msOffset": "0",
-                "link": "hWJtZA37VNw",
-                "radioName": "Head Radio FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "572160"
-            },
-            {
-                "id": "31",
-                "prevSongId": "30",
-                "nextSongId": "32",
-                "artist": "Meme Traders",
-                "title": "Automatic Transmission",
-                "msOffset": "161910",
-                "link": "ffTFv75KPmM",
-                "radioName": "Head Radio FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "572160"
-            },
-            {
-                "id": "32",
-                "prevSongId": "31",
-                "nextSongId": "30",
-                "artist": "Ohjaamo",
-                "title": "Complications",
-                "msOffset": "351296",
-                "link": "Lc06Lkpcx-k",
-                "radioName": "Head Radio FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "572160"
-            }
-        ]
-    },
-    {
-        "id": "5",
-        "game": {
-            "id": "1",
-            "gameName": "Grand Theft Auto",
-            "universe": "2D"
-        },
-        "name": "It's Unleashed FM",
-        "genre": "Rock",
-        "tags": [
-            {
-                "tagName": "Hard Rock"
-            },
-            {
-                "tagName": "Alternative Rock"
-            },
-            {
-                "tagName": "Trance"
-            }
-        ],
-        "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-        "songs": [
-            {
-                "id": "33",
-                "prevSongId": "35",
-                "nextSongId": "34",
-                "artist": "Stikki Fingers",
-                "title": "4 Letter Love",
-                "msOffset": "0",
-                "link": "yKbZCLZZfNQ",
-                "radioName": "It's Unleashed FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "572160"
-            },
-            {
-                "id": "34",
-                "prevSongId": "33",
-                "nextSongId": "35",
-                "artist": "The Hounds",
-                "title": "Let It Out",
-                "msOffset": "211065",
-                "link": "LVU2j1_jc2g",
-                "radioName": "It's Unleashed FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "572160"
-            },
-            {
-                "id": "35",
-                "prevSongId": "34",
-                "nextSongId": "33",
-                "artist": "Bleeding Stump",
-                "title": "Just Do It",
-                "msOffset": "351296",
-                "link": "XGWulVApCSE",
-                "radioName": "It's Unleashed FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "572160"
-            }
-        ]
-    },
-    {
-        "id": "6",
-        "game": {
-            "id": "1",
-            "gameName": "Grand Theft Auto",
-            "universe": "2D"
-        },
-        "name": "N-CT FM",
-        "genre": "Hip Hop",
-        "tags": [
-            {
-                "tagName": "Hip-Hop"
-            },
-            {
-                "tagName": "Gangsta Rap"
-            }
-        ],
-        "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-        "songs": [
-            {
-                "id": "36",
-                "prevSongId": "38",
-                "nextSongId": "37",
-                "artist": "Da Shootaz",
-                "title": "Grand Theft Auto",
-                "msOffset": "0",
-                "link": "ZSpXN9hUCng",
-                "radioName": "N-CT FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "442671"
-            },
-            {
-                "id": "37",
-                "prevSongId": "36",
-                "nextSongId": "38",
-                "artist": "Slumpussy",
-                "title": "This Life",
-                "msOffset": "141741",
-                "link": "jbsTb-bn_5g",
-                "radioName": "N-CT FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "442671"
-            },
-            {
-                "id": "38",
-                "prevSongId": "37",
-                "nextSongId": "36",
-                "artist": "CCC Featuring Robert DeNegro",
-                "title": "Blow Your Console",
-                "msOffset": "351296",
-                "link": "clKfBqaotX0",
-                "radioName": "N-CT FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "442671"
-            }
-        ]
-    },
-    {
-
-        "id": "7",
-        "game": {
-            "id": "1",
-            "gameName": "Grand Theft Auto",
-            "universe": "2D"
-        },
-        "name": "Radio '76 FM",
-        "genre": "Funk",
-        "tags": [
-
-            {
-                "tagName": "Funk"
-            }
-        ],
-        "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-        "songs": [
-            {
-                "id": "39",
-                "prevSongId": "41",
-                "nextSongId": "40",
-                "artist": "Ghetto Fingers",
-                "title": "On The Move",
-                "msOffset": "0",
-                "link": "SE7wJs9CgW8",
-                "radioName": "Radio '76 FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "578952"
-            },
-            {
-                "id": "40",
-                "prevSongId": "39",
-                "nextSongId": "41",
-                "artist": "Ashtar",
-                "title": "Aori",
-                "msOffset": "183946",
-                "link": "qXHIL_42aVU",
-                "radioName": "Radio '76 FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "578952"
-            },
-            {
-                "id": "41",
-                "prevSongId": "40",
-                "nextSongId": "39",
-                "artist": "Stylus Exodus",
-                "title": "Pootang Shebang",
-                "msOffset": "359715",
-                "link": "iQMpcVams5I",
-                "radioName": "Radio '76 FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "578952"
-
-            }
-        ]
-    },
-    {
-        "id": "8",
-        "game": {
-            "id": "1",
-            "gameName": "Grand Theft Auto",
-            "universe": "2D"
-        },
-        "name": "The Fix FM",
-        "genre": "Techno",
-        "tags": [
-            {
-                "tagName": "House"
-            },
-            {
-                "tagName": "Dance"
-            }
-        ],
-        "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-        "songs": [
-            {
-                "id": "42",
-                "prevSongId": "44",
-                "nextSongId": "43",
-                "artist": "Animal Testing Centre",
-                "title": "DSP",
-                "msOffset": "0",
-                "link": "cC0Nmn-2oGw",
-                "radioName": "The Fix FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "448758"
-            },
-            {
-                "id": "43",
-                "prevSongId": "42",
-                "nextSongId": "44",
-                "artist": "Rotorman",
-                "title": "Ride",
-                "msOffset": "176013",
-                "link": "Z-AzZp7ehh8",
-                "radioName": "The Fix FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "448758"
-            },
-            {
-                "id": "44",
-                "prevSongId": "43",
-                "nextSongId": "42",
-                "artist": "Technophiliak",
-                "title": "Lagerstar",
-                "msOffset": "292615",
-                "link": "WPaQcMAprDk",
-                "radioName": "The Fix FM",
-                "picLink": "https://static.wikigta.org/en/images/thumb/0/09/Gta1cover.jpg/600px-Gta1cover.jpg",
-                "msTotalLength": "448758"
             }
         ]
     }

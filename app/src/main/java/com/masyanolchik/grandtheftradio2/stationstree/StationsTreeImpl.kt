@@ -21,16 +21,19 @@ import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.SONG_PREFIX
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.STATION_PREFIX
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
 class StationsTreeImpl(
     private val repository: StationsRepository,
-    coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     private val appContext: Context
 ): StationsTree {
+    private var initializationJob: Job
     init {
-        coroutineScope.launch {
+        initializationJob = coroutineScope.launch {
             repository.getAllStations()
                 .collectLatest{
                     if(it is Result.Success) {
@@ -56,22 +59,34 @@ class StationsTreeImpl(
 
     }
 
-    override fun getItem(id: String): StationsTreeItem? {
+    override suspend fun getItem(id: String): StationsTreeItem? {
+        initializationJob.join()
         return treeNodes[id]?.item
     }
 
-    override fun getRoot(): StationsTreeItem? {
+    override suspend fun getRoot(): StationsTreeItem? {
+        initializationJob.join()
         return treeNodes[ROOT_ID]?.item
     }
 
-    override fun getChildren(id: String): List<StationsTreeItem> {
+    override suspend fun getChildren(id: String): List<StationsTreeItem> {
+        initializationJob.join()
         return treeNodes[id]?.getChildren()?: emptyList()
     }
 
     override fun reinitialize(stations: List<Station>) {
+        initializationJob.cancel()
         repository.nukeDatabase()
         repository.saveStations(stations)
-        initialize(stations)
+        initializationJob = coroutineScope.launch {
+            repository.getAllStations()
+                .collectLatest{
+                    if(it is Result.Success) {
+                        initialize(it.data)
+                    }
+                }
+        }
+
     }
 
    private fun initialize(stations: List<Station>) {
@@ -106,6 +121,7 @@ class StationsTreeImpl(
             val stream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
             val bitmapData = stream.toByteArray()
+            stream.close()
             treeNodes[mediaId] =
                 StationsTreeNode(
                     object: StationsTreeItem {

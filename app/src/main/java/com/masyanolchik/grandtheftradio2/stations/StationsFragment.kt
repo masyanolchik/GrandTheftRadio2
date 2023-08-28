@@ -5,28 +5,102 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.masyanolchik.grandtheftradio2.R
+import com.masyanolchik.grandtheftradio2.domain.Station
+import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
+import org.koin.android.scope.createScope
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.inject
+import org.koin.core.scope.Scope
 
 /**
  * A [Fragment] that displays stations for the given era.
  * Use the [StationsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class StationsFragment : Fragment() {
+class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
+    override val scope: Scope by lazy { createScope(this) }
+
+    private val stationPresenter: StationContract.Presenter by inject()
+
+    private lateinit var errorTextView: TextView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var stationAdapter: StationAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_stations, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val stationsLabelView = view.findViewById<TextView>(R.id.stations_label)
-        stationsLabelView.text = arguments?.getString("eraName")
+        val eraName = arguments?.getString("eraName") ?: ""
+        progressBar = view.findViewById(R.id.progress_bar)
+        errorTextView = view.findViewById(R.id.error_text)
+        recyclerView = view.findViewById(R.id.stations_list)
+
+        stationAdapter = StationAdapter(this::onStationTileClick,this::onTrailingTileIconClick)
+        recyclerView.apply {
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            adapter = stationAdapter
+        }
+        stationPresenter.setView(this)
+        stationPresenter.prepareItemsForEra(eraName)
+    }
+
+    private fun onStationTileClick(station: Station) {
+
+    }
+
+    private fun onTrailingTileIconClick(station: Station, isFavorite: Boolean) {
+
+    }
+
+
+    override fun showLoadingProgress() {
+        requireActivity().runOnUiThread {
+            errorTextView.isVisible = false
+            recyclerView.isVisible = false
+            progressBar.isVisible = true
+        }
+
+    }
+
+    override fun hideLoadingProgress() {
+        requireActivity().runOnUiThread {
+            errorTextView.isVisible = false
+            recyclerView.isVisible = true
+            progressBar.isVisible = false
+        }
+
+    }
+
+    override fun showErrorScreen() {
+        requireActivity().runOnUiThread {
+            errorTextView.isVisible = true
+            recyclerView.isVisible = false
+            progressBar.isVisible = false
+        }
+
+    }
+
+    override fun updateList(listItems: List<StationsTreeItem>) {
+        requireActivity().runOnUiThread {
+            stationAdapter.submitList(listItems)
+        }
+    }
+
+    override fun onDetach() {
+        stationPresenter.onDetach()
+        super.onDetach()
     }
 
     companion object {

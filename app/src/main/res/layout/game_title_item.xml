@@ -4,7 +4,7 @@
     android:id="@+id/game_label"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    android:textAppearance="?attr/textAppearanceCaption"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    android:textAppearance="?attr/textAppearanceBodySmall"
     android:textColor="?attr/colorOnBackground" />
