@@ -15,7 +15,7 @@ interface AssetImportContract {
     interface Presenter {
         fun processImportedJsonString(serializedString: String)
 
-        fun setView(view: AssetImportContract.View)
+        fun setView(view: View)
 
         fun onDetach()
     }

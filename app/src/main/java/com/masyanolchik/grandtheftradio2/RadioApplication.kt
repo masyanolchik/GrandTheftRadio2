@@ -1,9 +1,6 @@
 package com.masyanolchik.grandtheftradio2
 
 import android.app.Application
-import androidx.activity.ComponentActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.room.Room
 import com.masyanolchik.grandtheftradio2.assetimport.AssetImportContract
 import com.masyanolchik.grandtheftradio2.assetimport.ImportFragment
@@ -35,6 +32,15 @@ class RadioApplication : Application() {
             )
         } binds arrayOf(AssetImportContract.Presenter::class)
     }
+
+    private val importFragmentScopeModule = module {
+        scope<ImportFragment> {
+            scoped {
+                get<ImportFragment>().requireActivity().activityResultRegistry
+            }
+        }
+    }
+
     private val stationsTreeModule = module {
         single {
             Room.databaseBuilder(get(), LocalDatabase::class.java, LocalDatabase.DB_NAME).build()
@@ -47,14 +53,6 @@ class RadioApplication : Application() {
         single<StationsTree> { StationsTreeImpl(get(), CoroutineScope(Dispatchers.IO), get()) }
     }
 
-    private val fragmentScopeModule = module {
-        scope<ImportFragment> {
-            scoped {
-                get<ImportFragment>().requireActivity().activityResultRegistry
-            }
-        }
-    }
-
     override fun onCreate() {
         super.onCreate()
 
@@ -64,7 +62,7 @@ class RadioApplication : Application() {
             modules(
                 assetImportModule,
                 stationsTreeModule,
-                fragmentScopeModule
+                importFragmentScopeModule
             )
         }
     }
