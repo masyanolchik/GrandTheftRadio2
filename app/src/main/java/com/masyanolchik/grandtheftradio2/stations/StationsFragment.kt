@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.masyanolchik.grandtheftradio2.R
 import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
@@ -17,6 +19,7 @@ import org.koin.android.scope.createScope
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.component.inject
 import org.koin.core.scope.Scope
+import java.lang.RuntimeException
 
 /**
  * A [Fragment] that displays stations for the given era.
@@ -40,6 +43,12 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
         return inflater.inflate(R.layout.fragment_stations, container, false)
     }
 
+    private fun getSpanSizeLookup(adapter: StationAdapter, position: Int): Int {
+        return when(adapter.getItemViewType(position)) {
+            StationAdapter.GAME_VIEW_TYPE -> 2
+            else -> 1
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val eraName = arguments?.getString("eraName") ?: ""
@@ -49,7 +58,19 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
 
         stationAdapter = StationAdapter(this::onStationTileClick,this::onTrailingTileIconClick)
         recyclerView.apply {
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager =
+                GridLayoutManager(
+                    context,
+                    2,
+                    GridLayoutManager.VERTICAL,
+                    false
+                )
+                    .apply {
+                        spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                            override fun getSpanSize(position: Int) =
+                                getSpanSizeLookup(stationAdapter, position)
+                        }
+                    }
             adapter = stationAdapter
         }
         stationPresenter.setView(this)
