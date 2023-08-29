@@ -4,14 +4,13 @@ import android.net.Uri
 import android.os.SystemClock
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
+import com.masyanolchik.grandtheftradio2.domain.Station.Companion.START_TIME
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
-import org.robolectric.shadows.ShadowSystemClock
-import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class StationTest {
@@ -47,7 +46,7 @@ class StationTest {
 
     @Test
     fun testStation_getCurrentSongWithSeekPosition_returnsCorrectForSingleSongAtStartTime() {
-        val(song, seekMillis) = STATION_SINGLE_SONG.getCurrentSongWithSeekPosition()
+        val(song, seekMillis) = STATION_SINGLE_SONG.getCurrentSongWithSeekPosition(START_TIME)
 
         assertThat(song).isEqualTo(SINGLE_SONG_LIST.first())
         assertThat(seekMillis).isEqualTo(0L)
@@ -55,9 +54,7 @@ class StationTest {
 
     @Test
     fun testStation_getCurrentSongWithSeekPosition_returnsCorrectForSingleSongAfterTotalLengthPassed() {
-        ShadowSystemClock.advanceBy(300L,TimeUnit.MILLISECONDS)
-
-        val(song, seekMillis) = STATION_SINGLE_SONG.getCurrentSongWithSeekPosition()
+        val(song, seekMillis) = STATION_SINGLE_SONG.getCurrentSongWithSeekPosition(START_TIME + 300L)
 
         assertThat(song).isEqualTo(SINGLE_SONG_LIST.first())
         assertThat(seekMillis).isEqualTo(0L)
@@ -65,9 +62,7 @@ class StationTest {
 
     @Test
     fun testStation_getCurrentSongWithSeekPosition_returnsCorrectForSingleSongAfterTotalLengthExceeded() {
-        ShadowSystemClock.advanceBy(340L,TimeUnit.MILLISECONDS)
-
-        val(song, seekMillis) = STATION_SINGLE_SONG.getCurrentSongWithSeekPosition()
+        val(song, seekMillis) = STATION_SINGLE_SONG.getCurrentSongWithSeekPosition(START_TIME+340L)
 
         assertThat(song).isEqualTo(SINGLE_SONG_LIST.first())
         assertThat(seekMillis).isEqualTo(40L)
@@ -75,7 +70,7 @@ class StationTest {
 
     @Test
     fun testStation_getCurrentSongWithSeekPosition_returnsCorrectForMultipleSongsAtStartTime() {
-        val(song, seekMillis) = STATION_MULTIPLE_SONGS.getCurrentSongWithSeekPosition()
+        val(song, seekMillis) = STATION_MULTIPLE_SONGS.getCurrentSongWithSeekPosition(START_TIME)
 
         assertThat(song).isEqualTo(STATION_MULTIPLE_SONGS.songs.first())
         assertThat(seekMillis).isEqualTo(0L)
@@ -83,9 +78,7 @@ class StationTest {
 
     @Test
     fun testStation_getCurrentSongWithSeekPosition_returnsCorrectForMultipleSongsAfterTotalLengthPassed() {
-        ShadowSystemClock.advanceBy(300L,TimeUnit.MILLISECONDS)
-
-        val(song, seekMillis) = STATION_MULTIPLE_SONGS.getCurrentSongWithSeekPosition()
+        val(song, seekMillis) = STATION_MULTIPLE_SONGS.getCurrentSongWithSeekPosition(START_TIME+300L)
 
         assertThat(song).isEqualTo(STATION_MULTIPLE_SONGS.songs.first())
         assertThat(seekMillis).isEqualTo(0L)
@@ -93,9 +86,7 @@ class StationTest {
 
     @Test
     fun testStation_getCurrentSongWithSeekPosition_returnsCorrectForMultipleSongsAfterTotalLengthExceeded() {
-        ShadowSystemClock.advanceBy(310L,TimeUnit.MILLISECONDS)
-
-        val(song, seekMillis) = STATION_MULTIPLE_SONGS.getCurrentSongWithSeekPosition()
+        val(song, seekMillis) = STATION_MULTIPLE_SONGS.getCurrentSongWithSeekPosition(START_TIME+310L)
 
         assertThat(song).isEqualTo(STATION_MULTIPLE_SONGS.songs.first { it.id == 1 })
         assertThat(seekMillis).isEqualTo(1L)

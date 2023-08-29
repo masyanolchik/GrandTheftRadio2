@@ -1,5 +1,6 @@
 package com.masyanolchik.grandtheftradio2.stations.model
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.masyanolchik.grandtheftradio2.domain.Game
 import com.masyanolchik.grandtheftradio2.domain.Result
@@ -23,7 +24,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 
 
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(AndroidJUnit4::class)
 class StationModelTest {
     private val mockedStationsTree: StationsTree = mock()
     private lateinit var stationModel: StationModel

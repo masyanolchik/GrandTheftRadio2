@@ -1,13 +1,10 @@
 package com.masyanolchik.grandtheftradio2.domain
 
 import android.net.Uri
-import android.os.SystemClock
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
-import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.SONG_PREFIX
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.STATION_PREFIX
-import java.util.Calendar
 import kotlin.math.ceil
 
 data class Station (
@@ -35,10 +32,9 @@ data class Station (
             .build()
     }
 
-    fun getCurrentSongWithSeekPosition(): Pair<Song, Long> {
+    fun getCurrentSongWithSeekPosition(currentTimeMillis: Long): Pair<Song, Long> {
         val fullDurationMs = songs.first().msTotalLength
-        val currentTime = System.currentTimeMillis()
-        val timePassed = currentTime - START_TIME
+        val timePassed = currentTimeMillis - START_TIME
         val repeatCount = (timePassed.toDouble() / fullDurationMs)
         val currentOffset = ceil(repeatCount % 1 * fullDurationMs).toLong()
         val songsCopy = songs.toMutableList()

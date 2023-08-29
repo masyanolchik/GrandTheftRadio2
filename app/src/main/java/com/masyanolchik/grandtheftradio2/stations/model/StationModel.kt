@@ -7,6 +7,7 @@ import com.masyanolchik.grandtheftradio2.stationstree.StationsTree
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.ERA_ID
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.GAME_PREFIX
+import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.STATION_PREFIX
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
@@ -16,9 +17,14 @@ class StationModel(private val stationsTree: StationsTree): StationContract.Mode
         return flow {
             val gamesForGivenEra = stationsTree.getChildren(ERA_ID+eraName).filterIsInstance<Game>()
             val finalItems = buildList {
-                gamesForGivenEra.sortedBy { it.id }.forEach {
-                    add(it)
-                    addAll(stationsTree.getChildren(GAME_PREFIX+it.id))
+                gamesForGivenEra.sortedBy { it.id }.forEach {game ->
+                    val stationsForGame = stationsTree.getChildren(GAME_PREFIX+game.id).filter {
+                        it.toMediaItem().mediaId.contains(STATION_PREFIX)
+                    }
+                    if(stationsForGame.isNotEmpty()) {
+                        add(game)
+                        addAll(stationsForGame)
+                    }
                 }
             }
             if(finalItems.isNotEmpty()) {

@@ -41,7 +41,7 @@ class MainActivityTest {
         }
         rule.scenario.moveToState(Lifecycle.State.RESUMED)
 
-        onView(ViewMatchers.withId(R.id.twod_dest)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.twod_dest_menu)).perform(ViewActions.click())
         onView(ViewMatchers.withId(R.id.toolbar)).check { view, _ ->
             val toolbar = (view as Toolbar)
 
@@ -59,7 +59,7 @@ class MainActivityTest {
         }
         rule.scenario.moveToState(Lifecycle.State.RESUMED)
 
-        onView(ViewMatchers.withId(R.id.threed_dest)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.threed_dest_menu)).perform(ViewActions.click())
         onView(ViewMatchers.withId(R.id.toolbar)).check { view, _ ->
             val toolbar = (view as Toolbar)
 
@@ -77,7 +77,7 @@ class MainActivityTest {
         }
         rule.scenario.moveToState(Lifecycle.State.RESUMED)
 
-        onView(ViewMatchers.withId(R.id.hd_dest)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.hd_dest_menu)).perform(ViewActions.click())
         onView(ViewMatchers.withId(R.id.toolbar)).check { view, _ ->
             val toolbar = (view as Toolbar)
 
@@ -95,7 +95,7 @@ class MainActivityTest {
         }
         rule.scenario.moveToState(Lifecycle.State.RESUMED)
 
-        onView(ViewMatchers.withId(R.id.import_dest)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.import_dest_menu)).perform(ViewActions.click())
         onView(ViewMatchers.withId(R.id.toolbar)).check { view, _ ->
             val toolbar = (view as Toolbar)
 

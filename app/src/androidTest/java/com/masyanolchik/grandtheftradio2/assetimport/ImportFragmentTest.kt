@@ -37,7 +37,7 @@ import java.util.concurrent.TimeoutException
 
 
 private const val BASIC_SAMPLE_PACKAGE = "com.masyanolchik.grandtheftradio2"
-private const val LAUNCH_TIMEOUT = 4000L
+private const val LAUNCH_TIMEOUT = 5000L
 @RunWith(AndroidJUnit4::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ImportFragmentTest {

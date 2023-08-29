@@ -176,7 +176,7 @@ import org.koin.android.ext.android.inject
             val currentOrderedNewChildrenDeferred = coroutineScope.async {
                 val upcomingMediaItem = stationsTree.getItem(mediaItems.first().mediaId)
                 if(upcomingMediaItem is Station) {
-                    val (song, offset) = upcomingMediaItem.getCurrentSongWithSeekPosition()
+                    val (song, offset) = upcomingMediaItem.getCurrentSongWithSeekPosition(System.currentTimeMillis())
                     currentSong = song
                     currentOffSet = offset
                     currentSongHasBeenSought = false
