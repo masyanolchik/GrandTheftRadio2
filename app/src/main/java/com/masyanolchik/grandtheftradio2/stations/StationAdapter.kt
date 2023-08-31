@@ -1,9 +1,14 @@
 package com.masyanolchik.grandtheftradio2.stations
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -63,7 +68,37 @@ class StationAdapter(
                             )
                         )
                     )
-                    view.setOnClickListener { onTileClickCallback.invoke(stationsTreeItem) }
+                    val animatorSet = AnimatorSet().apply {
+                        val scaleDownAnim = ValueAnimator.ofFloat(1f,0.9f).apply {
+                            addUpdateListener {
+                                view.scaleX = it.animatedValue as Float
+                                view.scaleY = it.animatedValue as Float
+                            }
+                        }
+                        val scaleUpAnim = ValueAnimator.ofFloat(0.9f, 1f).apply {
+                            addUpdateListener {
+                                view.scaleX = it.animatedValue as Float
+                                view.scaleY = it.animatedValue as Float
+                            }
+                        }
+                        playSequentially(scaleDownAnim,scaleUpAnim)
+                    }
+                    view.setOnTouchListener { v, event ->
+                        when(event.action) {
+                            MotionEvent.ACTION_UP -> {
+                                v.performClick()
+                            }
+                            MotionEvent.ACTION_DOWN -> {
+                                animatorSet.cancel()
+                                animatorSet.start()
+                                true
+                            }
+                            else -> true
+                        }
+                    }
+                    view.setOnClickListener {
+                        onTileClickCallback.invoke(stationsTreeItem)
+                    }
                     title.text = stationsTreeItem.name
                     trailingImageButton.isVisible = false
                     trailingImageButton.setOnClickListener {
