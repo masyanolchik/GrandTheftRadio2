@@ -340,8 +340,8 @@
             "universe": "2D"
         },
         "name": "Brooklyn Underground FM",
-        "genre": "Drum 'N' Bass",
         "favorite": "false",
+        "genre": "Techno",
         "tags": [
             {
                 "tagName": "Drum 'N' Bass"
@@ -444,7 +444,7 @@
             "universe": "2D"
         },
         "name": "It's Unleashed FM",
-        "genre": "Hard Rock",
+        "genre": "Rock",
         "favorite": "false",
         "tags": [
             {

@@ -122,7 +122,7 @@ class StationAdapter(
                 return when(station.genre) {
                     "Hip Hop" -> R.drawable.hip_hop
                     "Country" -> R.drawable.country
-                    "Techno" -> R.drawable.techno
+                    "Techno", "House" -> R.drawable.techno
                     "Rock" -> R.drawable.rock
                     "Funk" -> R.drawable.funk
                     else -> R.drawable.hip_hop
