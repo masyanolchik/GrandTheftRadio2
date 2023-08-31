@@ -27,53 +27,6 @@ import org.koin.dsl.module
 
 class RadioApplication : Application() {
 
-    private val assetImportModule = module {
-        single<AssetImportContract.Model> { AssetImportModel(get()) }
-        single { _ ->
-            AssetImportPresenter(
-                get(),
-                CoroutineScope(Dispatchers.IO),
-                Dispatchers.Main
-            )
-        } binds arrayOf(AssetImportContract.Presenter::class)
-    }
-
-    private val importFragmentScopeModule = module {
-        scope<ImportFragment> {
-            scoped {
-                get<ImportFragment>().requireActivity().activityResultRegistry
-            }
-        }
-    }
-
-    private val stationFragmentScopeModule = module {
-        scope<StationsFragment> {
-            scoped {
-                StationPresenter(
-                    StationModel(get()),
-                    CoroutineScope(Dispatchers.IO),
-                    Dispatchers.Main
-                ) as StationContract.Presenter
-            }
-        }
-    }
-
-    private val stationsTreeModule = module {
-        single {
-            Room.databaseBuilder(get(), LocalDatabase::class.java, LocalDatabase.DB_NAME).build()
-        } binds arrayOf(LocalDatabase::class)
-        single<StationsDao> {
-            val database = get<LocalDatabase>()
-            database.stationsDao()
-        }
-        factory<StationsRepository> { StationsRepositoryImpl(get()) }
-        single<StationsTree> { StationsTreeImpl(get(), CoroutineScope(Dispatchers.IO), get()) }
-    }
-
-    private val playbackServiceModule = module {
-        factory { CoroutineScope(Dispatchers.IO) }
-    }
-
     override fun onCreate() {
         super.onCreate()
 
@@ -82,11 +35,68 @@ class RadioApplication : Application() {
             androidContext(this@RadioApplication)
             modules(
                 assetImportModule,
-                stationsTreeModule,
                 importFragmentScopeModule,
                 stationFragmentScopeModule,
-                playbackServiceModule
+                playbackServiceModule,
+                stationsTreeModule,
+                stationsDbModule,
+                stationsRepositoryModule
             )
+        }
+    }
+
+    companion object {
+        val assetImportModule = module {
+            single<AssetImportContract.Model> { AssetImportModel(get()) }
+            single { _ ->
+                AssetImportPresenter(
+                    get(),
+                    CoroutineScope(Dispatchers.IO),
+                    Dispatchers.Main
+                )
+            } binds arrayOf(AssetImportContract.Presenter::class)
+        }
+
+        val importFragmentScopeModule = module {
+            scope<ImportFragment> {
+                scoped {
+                    get<ImportFragment>().requireActivity().activityResultRegistry
+                }
+            }
+        }
+
+        val stationFragmentScopeModule = module {
+            scope<StationsFragment> {
+                scoped {
+                    StationPresenter(
+                        StationModel(get()),
+                        CoroutineScope(Dispatchers.IO),
+                        Dispatchers.Main
+                    ) as StationContract.Presenter
+                }
+            }
+        }
+
+        val stationsDbModule = module {
+            single {
+                Room.databaseBuilder(get(), LocalDatabase::class.java, LocalDatabase.DB_NAME).build()
+            } binds arrayOf(LocalDatabase::class)
+            single<StationsDao> {
+                val database = get<LocalDatabase>()
+                database.stationsDao()
+            }
+        }
+
+        val stationsRepositoryModule = module {
+            factory<StationsRepository> { StationsRepositoryImpl(get()) }
+        }
+
+        val stationsTreeModule = module {
+            single<StationsTree> { StationsTreeImpl(get(), CoroutineScope(Dispatchers.IO), get()) }
+        }
+
+        val playbackServiceModule = module {
+            factory { CoroutineScope(Dispatchers.IO) }
         }
     }
 }

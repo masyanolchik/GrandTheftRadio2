@@ -6,5 +6,6 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="4dp"
+    android:theme="@style/Base.Theme.GrandTheftRadio2"
     android:textAppearance="?attr/textAppearanceBodySmall"
     android:textColor="?attr/colorOnBackground" />

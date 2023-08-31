@@ -16,10 +16,8 @@ class StationPresenter(
 ): StationContract.Presenter {
     private var stationContractView: StationContract.View? = null
     override fun prepareItemsForEra(eraName: String) {
+        stationContractView?.showLoadingProgress()
         coroutineScope.launch {
-            withContext(uiDispatcher) {
-                stationContractView?.showLoadingProgress()
-            }
             stationContractModel
                 .getItemsForEra(eraName)
                 .flowOn(uiDispatcher)

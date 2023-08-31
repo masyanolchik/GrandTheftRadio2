@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.masyanolchik.grandtheftradio2.InstrumentationTestRunner"
     }
 
     buildTypes {
@@ -87,11 +87,13 @@ dependencies {
     testImplementation ("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("androidx.test.espresso:espresso-core:3.5.1")
     debugImplementation("androidx.fragment:fragment-testing:$fragmentVersion")
+    androidTestImplementation("io.insert-koin:koin-test:$koinVersion")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
     androidTestImplementation ("com.google.truth:truth:$truthVersion")
     androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation ("androidx.test.ext:junit-ktx:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     androidTestImplementation ("androidx.test:core-ktx:1.5.0")
 }

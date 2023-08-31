@@ -32,6 +32,8 @@ class StationsTreeImpl(
     private val appContext: Context
 ): StationsTree {
     private var initializationJob: Job
+    private var treeNodes: MutableMap<String, StationsTreeNode> = mutableMapOf()
+
     init {
         initializationJob = coroutineScope.launch {
             repository.getAllStations()
@@ -44,7 +46,6 @@ class StationsTreeImpl(
 
     }
 
-    private var treeNodes: MutableMap<String, StationsTreeNode> = mutableMapOf()
 
     private inner class StationsTreeNode(val item: StationsTreeItem) {
         private val children: MutableList<StationsTreeItem> = ArrayList()

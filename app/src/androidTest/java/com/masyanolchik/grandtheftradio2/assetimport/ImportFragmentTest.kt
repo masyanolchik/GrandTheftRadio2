@@ -22,7 +22,9 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
+import com.masyanolchik.grandtheftradio2.KoinTestRule
 import com.masyanolchik.grandtheftradio2.R
+import com.masyanolchik.grandtheftradio2.RadioApplication
 import org.hamcrest.Matcher
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.allOf
@@ -30,6 +32,7 @@ import org.hamcrest.Matchers.notNullValue
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.FixMethodOrder
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
@@ -44,6 +47,8 @@ class ImportFragmentTest {
     private val device: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     private lateinit var context: Context
 
+    @get:Rule
+    val koinTestRule = KoinTestRule()
 
     @Before
     fun startImportFragmentScreen() {

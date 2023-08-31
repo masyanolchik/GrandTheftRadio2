@@ -10,15 +10,27 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
+import com.masyanolchik.grandtheftradio2.stations.StationContract
+import com.masyanolchik.grandtheftradio2.stations.StationsFragment
+import com.masyanolchik.grandtheftradio2.stations.model.StationModel
+import com.masyanolchik.grandtheftradio2.stations.presenter.StationPresenter
+import com.masyanolchik.grandtheftradio2.stationstree.repository.StationsRepository
+import com.masyanolchik.grandtheftradio2.stationstree.repository.testing.FakeStationRepositoryImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.dsl.module
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
     @get:Rule
     val rule = activityScenarioRule<MainActivity>()
+
+    @get:Rule
+    val koinTestRule = KoinTestRule()
 
     @Test
     fun testNavigation_homeDestIsFavorites() {
