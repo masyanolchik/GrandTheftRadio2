@@ -18,7 +18,7 @@ interface StationContract {
     interface Presenter {
         fun prepareItemsForEra(eraName: String)
 
-        fun setView(view: StationContract.View)
+        fun setView(view: View)
 
         fun onDetach()
     }

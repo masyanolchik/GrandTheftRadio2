@@ -1,5 +1,6 @@
 package com.masyanolchik.grandtheftradio2.stations
 
+import android.content.ComponentName
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,10 +9,15 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.media3.session.MediaController
+import androidx.media3.session.SessionToken
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.common.util.concurrent.ListenableFuture
+import com.google.common.util.concurrent.MoreExecutors
+import com.masyanolchik.grandtheftradio2.PlaybackService
 import com.masyanolchik.grandtheftradio2.R
 import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
@@ -26,6 +32,7 @@ import java.lang.RuntimeException
  * Use the [StationsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     override val scope: Scope by lazy { createScope(this) }
 
@@ -35,6 +42,10 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var stationAdapter: StationAdapter
+
+    private lateinit var controllerFuture: ListenableFuture<MediaController>
+    private val controller: MediaController?
+        get() = if (controllerFuture.isDone) controllerFuture.get() else null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +62,7 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeController()
         val eraName = arguments?.getString("eraName") ?: ""
         progressBar = view.findViewById(R.id.progress_bar)
         errorTextView = view.findViewById(R.id.error_text)
@@ -78,12 +90,24 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     }
 
     private fun onStationTileClick(station: Station) {
-
+        controller?.clearMediaItems()
+        controller?.addMediaItems(station.songs.map { it.toMediaItem() })
+        controller?.play()
     }
 
     private fun onTrailingTileIconClick(station: Station, isFavorite: Boolean) {
 
     }
+
+    private fun initializeController() {
+        val context = requireContext()
+        controllerFuture =
+            MediaController.Builder(
+                context,
+                SessionToken(context, ComponentName(context, PlaybackService::class.java))
+            ).buildAsync()
+    }
+
 
 
     override fun showLoadingProgress() {
