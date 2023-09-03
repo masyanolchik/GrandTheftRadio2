@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ImageShapeAppearance">
+        <item name="cornerSize">30%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="PlayerButtonShapeAppearance">
+        <item name="cornerSize">100%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+</resources>

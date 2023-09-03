@@ -62,6 +62,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation ("androidx.room:room-runtime:$roomVersion")
+    implementation("io.coil-kt:coil:2.4.0")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     kapt ("org.xerial:sqlite-jdbc:3.36.0")
     kapt ("androidx.room:room-compiler:$roomVersion")
     implementation ("com.google.code.gson:gson:$gsonVersion")
