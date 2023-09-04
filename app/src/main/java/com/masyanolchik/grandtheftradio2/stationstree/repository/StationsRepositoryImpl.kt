@@ -2,7 +2,6 @@ package com.masyanolchik.grandtheftradio2.stationstree.repository
 
 import com.masyanolchik.grandtheftradio2.db.game.fromDomain
 import com.masyanolchik.grandtheftradio2.db.song.fromDomain
-import com.masyanolchik.grandtheftradio2.db.song.fromPrevNextDomain
 import com.masyanolchik.grandtheftradio2.db.station.StationSongsCrossRef
 import com.masyanolchik.grandtheftradio2.db.station.StationsDao
 import com.masyanolchik.grandtheftradio2.db.station.fromDomain
@@ -20,7 +19,6 @@ class StationsRepositoryImpl(private val stationsDao: StationsDao): StationsRepo
             val songs = stations.map { it.songs }.flatten()
             games.forEach { stationsDao.addGame(it.fromDomain()) }
             stationsDao.addSongs(songs.map { it.fromDomain() })
-            stationsDao.addLocalSongPrevNext(songs.map { it.fromPrevNextDomain() })
             stations.forEach { station ->
                 val localStation = station.fromDomain()
                 stationsDao.addStation(localStation)

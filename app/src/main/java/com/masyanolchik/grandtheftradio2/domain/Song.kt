@@ -8,8 +8,6 @@ import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion
 
 data class Song(
     val id: Int,
-    val prevSongId: Int,
-    val nextSongId: Int,
     val artist: String,
     val title: String,
     val msOffset: Long,

@@ -58,8 +58,6 @@ class FakeStationRepositoryImpl: StationsRepository {
         private val FIRST_STATION_SONGS_LIST = listOf(
             Song(
                 id = 0,
-                prevSongId = 2,
-                nextSongId = 1,
                 artist = "art1",
                 title = "title1",
                 msOffset = 0L,
@@ -70,8 +68,6 @@ class FakeStationRepositoryImpl: StationsRepository {
             ),
             Song(
                 id = 1,
-                prevSongId = 0,
-                nextSongId = 2,
                 artist = "art1",
                 title = "title2",
                 msOffset = 50L,
@@ -82,8 +78,6 @@ class FakeStationRepositoryImpl: StationsRepository {
             ),
             Song(
                 id = 2,
-                prevSongId = 1,
-                nextSongId = 0,
                 artist = "art2",
                 title = "title3",
                 msOffset = 100L,
@@ -96,8 +90,6 @@ class FakeStationRepositoryImpl: StationsRepository {
         private val SECOND_STATION_SONGS_LIST = listOf(
             Song(
                 id = 3,
-                prevSongId = 5,
-                nextSongId = 4,
                 artist = "art3",
                 title = "title4",
                 msOffset = 0L,
@@ -108,8 +100,6 @@ class FakeStationRepositoryImpl: StationsRepository {
             ),
             Song(
                 id = 4,
-                prevSongId = 3,
-                nextSongId = 5,
                 artist = "art3",
                 title = "title5",
                 msOffset = 20L,
@@ -120,8 +110,6 @@ class FakeStationRepositoryImpl: StationsRepository {
             ),
             Song(
                 id = 5,
-                prevSongId = 4,
-                nextSongId = 3,
                 artist = "art5",
                 title = "title9",
                 msOffset = 40L,
@@ -135,8 +123,6 @@ class FakeStationRepositoryImpl: StationsRepository {
         private val THIRD_STATION_SONGS_LIST = listOf(
             Song(
                 id = 6,
-                prevSongId = 5,
-                nextSongId = 7,
                 artist = "art5",
                 title = "title9",
                 msOffset = 0L,
@@ -147,8 +133,6 @@ class FakeStationRepositoryImpl: StationsRepository {
             ),
             Song(
                 id =7,
-                prevSongId = 6,
-                nextSongId = 8,
                 artist = "art3",
                 title = "title5",
                 msOffset = 20L,
@@ -159,8 +143,6 @@ class FakeStationRepositoryImpl: StationsRepository {
             ),
             Song(
                 id = 8,
-                prevSongId = 7,
-                nextSongId = 9,
                 artist = "art5",
                 title = "title9",
                 msOffset = 40L,

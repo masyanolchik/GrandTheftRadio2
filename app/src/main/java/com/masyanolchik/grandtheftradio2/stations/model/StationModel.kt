@@ -2,6 +2,7 @@ package com.masyanolchik.grandtheftradio2.stations.model
 
 import com.masyanolchik.grandtheftradio2.domain.Game
 import com.masyanolchik.grandtheftradio2.domain.Result
+import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stations.StationContract
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTree
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
@@ -37,5 +38,9 @@ class StationModel(private val stationsTree: StationsTree): StationContract.Mode
                 )
             }
         }
+    }
+
+    override suspend fun updateStation(station: Station) {
+       stationsTree.updateStation(station)
     }
 }

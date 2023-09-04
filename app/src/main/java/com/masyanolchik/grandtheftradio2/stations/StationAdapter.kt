@@ -12,6 +12,7 @@ import android.view.ViewPropertyAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -25,7 +26,7 @@ import java.lang.RuntimeException
 
 class StationAdapter(
     private val onTileClickCallback: (Station) -> Unit,
-    private val onTrailingButtonClickCallback: (Station, Boolean) -> Unit
+    private val onTrailingButtonClickCallback: (Station) -> Unit
 ): ListAdapter<StationsTreeItem, StationAdapter.StationsViewHolder>(StationsTreeItemDiff()) {
     abstract class StationsViewHolder(protected val view: View): ViewHolder(view) {
         abstract fun bind(stationsTreeItem: StationsTreeItem)
@@ -52,12 +53,11 @@ class StationAdapter(
         class RadioStationViewHolder(
             view: View,
             private val onTileClickCallback: (Station) -> Unit,
-            private val onTrailingButtonClickCallback: (Station, Boolean) -> Unit,
+            private val onTrailingButtonClickCallback: (Station) -> Unit,
         ): StationsViewHolder(view) {
             private val genreIcon: ImageView = view.findViewById(R.id.leading_icon)
             private val title: TextView = view.findViewById(R.id.station_name)
             private val trailingImageButton: ImageButton = view.findViewById(R.id.trailing_icon)
-            private var isFavorite = false
 
             override fun bind(stationsTreeItem: StationsTreeItem) {
                 if(stationsTreeItem is Station) {
@@ -100,12 +100,23 @@ class StationAdapter(
                         onTileClickCallback.invoke(stationsTreeItem)
                     }
                     title.text = stationsTreeItem.name
-                    trailingImageButton.isVisible = false
+                    val trailingIcon = if(stationsTreeItem.favorite) {
+                        R.drawable.favorite
+                    } else {
+                        R.drawable.favorite_borderless
+                    }
+                    trailingImageButton.setImageDrawable(AppCompatResources.getDrawable(view.context, trailingIcon))
                     trailingImageButton.setOnClickListener {
+                        stationsTreeItem.favorite = !stationsTreeItem.favorite
                         onTrailingButtonClickCallback.invoke(
                             stationsTreeItem,
-                            isFavorite
                         )
+                        val icon = if(stationsTreeItem.favorite) {
+                            R.drawable.favorite
+                        } else {
+                            R.drawable.favorite_borderless
+                        }
+                        trailingImageButton.setImageDrawable(AppCompatResources.getDrawable(view.context, icon))
                     }
                 } else {
                     throw throw RuntimeException("Unknown item provided to ${this::class.simpleName}")
@@ -128,7 +139,7 @@ class StationAdapter(
                     context: Context,
                     parent: ViewGroup,
                     onTileClickCallback: (Station) -> Unit,
-                    onTrailingButtonClickCallback: (Station, Boolean) -> Unit
+                    onTrailingButtonClickCallback: (Station) -> Unit
                 ) = RadioStationViewHolder(
                         LayoutInflater.from(context)
                             .inflate(R.layout.station_card_item, parent, false),

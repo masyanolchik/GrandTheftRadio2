@@ -10,5 +10,7 @@ interface StationsTree {
 
     suspend fun getChildren(id: String): List<StationsTreeItem>
 
+    suspend fun updateStation(station: Station)
+
     fun reinitialize(stations: List<Station>)
 }

@@ -95,8 +95,8 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
         controller?.play()
     }
 
-    private fun onTrailingTileIconClick(station: Station, isFavorite: Boolean) {
-
+    private fun onTrailingTileIconClick(station: Station) {
+        stationPresenter.updateStation(station)
     }
 
     private fun initializeController() {

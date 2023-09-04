@@ -1,6 +1,7 @@
 package com.masyanolchik.grandtheftradio2.stations.presenter
 
 import com.masyanolchik.grandtheftradio2.domain.Result
+import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stations.StationContract
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +29,12 @@ class StationPresenter(
                         else -> stationContractView?.showErrorScreen()
                     }
                 }
+        }
+    }
+
+    override fun updateStation(station: Station) {
+        coroutineScope.launch {
+            stationContractModel.updateStation(station)
         }
     }
 
