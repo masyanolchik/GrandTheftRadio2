@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
+import com.masyanolchik.grandtheftradio2.MediaControllerHost
 import com.masyanolchik.grandtheftradio2.PlaybackService
 import com.masyanolchik.grandtheftradio2.R
 import com.masyanolchik.grandtheftradio2.domain.Station
@@ -43,10 +46,6 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     private lateinit var recyclerView: RecyclerView
     private lateinit var stationAdapter: StationAdapter
 
-    private lateinit var controllerFuture: ListenableFuture<MediaController>
-    private val controller: MediaController?
-        get() = if (controllerFuture.isDone) controllerFuture.get() else null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +61,6 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeController()
         val eraName = arguments?.getString("eraName") ?: ""
         progressBar = view.findViewById(R.id.progress_bar)
         errorTextView = view.findViewById(R.id.error_text)
@@ -90,24 +88,33 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     }
 
     private fun onStationTileClick(station: Station) {
-        controller?.clearMediaItems()
-        controller?.addMediaItems(station.songs.map { it.toMediaItem() })
-        controller?.play()
+        val hostActivity = requireActivity()
+        if(hostActivity is MediaControllerHost) {
+            val controller = hostActivity.getHostMediaController()
+            controller?.clearMediaItems()
+            val (songs, offset) = station.getSongsListWithCurrentAtTheTopAndSeekPosition(System.currentTimeMillis())
+            controller?.addMediaItems(
+                songs.map {
+                    it.toMediaItem()
+                }
+            )
+            val seekListener = object : Player.Listener {
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    if(isPlaying) {
+                        controller?.seekTo(offset)
+                        controller?.removeListener(this)
+                    }
+                }
+            }
+            controller?.addListener(seekListener)
+            controller?.play()
+        }
+
     }
 
     private fun onTrailingTileIconClick(station: Station, isFavorite: Boolean) {
 
     }
-
-    private fun initializeController() {
-        val context = requireContext()
-        controllerFuture =
-            MediaController.Builder(
-                context,
-                SessionToken(context, ComponentName(context, PlaybackService::class.java))
-            ).buildAsync()
-    }
-
 
 
     override fun showLoadingProgress() {

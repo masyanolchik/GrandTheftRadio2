@@ -3,6 +3,7 @@ package com.masyanolchik.grandtheftradio2
 import android.content.ComponentName
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -29,7 +30,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MediaControllerHost {
     private lateinit var miniPlayer: View
     private lateinit var playPauseButton: MaterialButton
     private lateinit var albumCoverView: ImageView
@@ -135,8 +136,6 @@ class MainActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
-
-        initializeController()
     }
 
     private fun initializeController() {
@@ -148,8 +147,17 @@ class MainActivity : AppCompatActivity() {
         controllerFuture.addListener({ setController() }, MoreExecutors.directExecutor())
     }
 
+    override fun onStart() {
+        super.onStart()
+        initializeController()
+    }
+
     private fun setController() {
         val controller = this.controller ?: return
+
+        if(controller.isLoading || controller.isPlaying) {
+            miniPlayer.isVisible = true
+        }
 
         isPlayingUiSwitch(controller.isPlaying)
 
@@ -157,7 +165,6 @@ class MainActivity : AppCompatActivity() {
 
         controller.addListener(
             object : Player.Listener {
-
                 override fun onPlayerError(error: PlaybackException) {
                     playPauseButton.icon =
                         AppCompatResources.getDrawable(this@MainActivity, R.drawable.error)
@@ -230,6 +237,8 @@ class MainActivity : AppCompatActivity() {
             miniPlayer.isVisible = it.getBoolean(MINI_PLAYER_IS_VISIBLE_KEY)
         }
     }
+
+    override fun getHostMediaController() = controller
 
     companion object {
         private const val MINI_PLAYER_IS_VISIBLE_KEY = "mini_player_visible"

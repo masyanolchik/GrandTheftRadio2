@@ -42,6 +42,17 @@ data class Station (
         return Pair(currentSong, currentOffset - currentSong.msOffset)
     }
 
+    fun getSongsListWithCurrentAtTheTopAndSeekPosition(currentTimeMillis: Long): Pair<List<Song>,Long> {
+        val (song, offset) = getCurrentSongWithSeekPosition(currentTimeMillis)
+        val rearrangedList = buildList {
+            add(song)
+            val position = songs.indexOf(song)
+            addAll(songs.takeLast(songs.size - 1 - position))
+            addAll(songs.take(position))
+        }
+        return Pair(rearrangedList, offset)
+    }
+
     companion object {
         const val START_TIME = 1610539200000L
     }

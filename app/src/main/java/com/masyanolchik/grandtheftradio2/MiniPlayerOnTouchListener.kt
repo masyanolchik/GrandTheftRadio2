@@ -21,7 +21,7 @@ class MiniPlayerOnTouchListener(private val onDismissCallback:(View)->Unit) : On
                     onDismissCallback(view)
                 } else {
                     view.performClick()
-                    view.animate().translationX(cardStart).setDuration(100).start()
+                    view.animate().x(cardStart).setDuration(100).start()
                     view.animate().alpha(1f).setDuration(100).start()
                 }
             }
