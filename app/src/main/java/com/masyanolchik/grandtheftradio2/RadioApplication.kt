@@ -8,6 +8,10 @@ import com.masyanolchik.grandtheftradio2.assetimport.model.AssetImportModel
 import com.masyanolchik.grandtheftradio2.assetimport.presenter.AssetImportPresenter
 import com.masyanolchik.grandtheftradio2.db.LocalDatabase
 import com.masyanolchik.grandtheftradio2.db.station.StationsDao
+import com.masyanolchik.grandtheftradio2.favorites.FavoritesContract
+import com.masyanolchik.grandtheftradio2.favorites.FavoritesFragment
+import com.masyanolchik.grandtheftradio2.favorites.model.FavoritesModel
+import com.masyanolchik.grandtheftradio2.favorites.presenter.FavoritesPresenter
 import com.masyanolchik.grandtheftradio2.stations.StationContract
 import com.masyanolchik.grandtheftradio2.stations.StationsFragment
 import com.masyanolchik.grandtheftradio2.stations.model.StationModel
@@ -37,6 +41,7 @@ class RadioApplication : Application() {
                 assetImportModule,
                 importFragmentScopeModule,
                 stationFragmentScopeModule,
+                favoritesFragmentScopeModule,
                 playbackServiceModule,
                 stationsTreeModule,
                 stationsDbModule,
@@ -73,6 +78,18 @@ class RadioApplication : Application() {
                         CoroutineScope(Dispatchers.IO),
                         Dispatchers.Main
                     ) as StationContract.Presenter
+                }
+            }
+        }
+
+        val favoritesFragmentScopeModule = module {
+            scope<FavoritesFragment> {
+                scoped {
+                    FavoritesPresenter(
+                        FavoritesModel(get()),
+                        CoroutineScope(Dispatchers.IO),
+                        Dispatchers.Main
+                    ) as FavoritesContract.Presenter
                 }
             }
         }

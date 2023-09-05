@@ -8,9 +8,9 @@ import com.masyanolchik.grandtheftradio2.db.station.fromDomain
 import com.masyanolchik.grandtheftradio2.db.station.toDomain
 import com.masyanolchik.grandtheftradio2.domain.Station
 import kotlinx.coroutines.flow.Flow
-import java.lang.Exception
 import com.masyanolchik.grandtheftradio2.domain.Result
 import kotlinx.coroutines.flow.flowOf
+import kotlin.Exception
 
 class StationsRepositoryImpl(private val stationsDao: StationsDao): StationsRepository {
     override fun saveStations(stations: List<Station>): Flow<Result<Nothing>> {
@@ -36,6 +36,10 @@ class StationsRepositoryImpl(private val stationsDao: StationsDao): StationsRepo
         } catch (ex: Exception) {
             flowOf(Result.Error(ex))
         }
+    }
+
+    override fun updateStation(station: Station) {
+        stationsDao.updateStation(station.fromDomain())
     }
 
     override fun nukeDatabase(): Flow<Result<Nothing>> {

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.Companion.REPLACE
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.masyanolchik.grandtheftradio2.db.game.LocalGame
 import com.masyanolchik.grandtheftradio2.db.song.LocalSong
 
@@ -21,6 +22,9 @@ interface StationsDao {
 
     @Insert(onConflict = REPLACE)
     fun addStation(localStation: LocalStation)
+
+    @Update
+    fun updateStation(localStation: LocalStation)
 
     @Insert(onConflict = REPLACE)
     fun addStationSongsCrossRef(stationSongsCrossRef: StationSongsCrossRef)

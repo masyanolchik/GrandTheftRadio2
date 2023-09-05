@@ -58,6 +58,10 @@ class StationsTreeImpl(
             return ImmutableList.copyOf(children)
         }
 
+        fun removeChild(childID: String) {
+            children.removeIf { it is Station && (STATION_PREFIX + it.id == childID) }
+        }
+
     }
 
     override suspend fun getItem(id: String): StationsTreeItem? {
@@ -85,7 +89,10 @@ class StationsTreeImpl(
         }
         if(station.favorite) {
             treeNodes[ERA_ID + FAVORITE_TAB_TITLE]?.addChild(stationId)
+        } else {
+            treeNodes[ERA_ID + FAVORITE_TAB_TITLE]?.removeChild(stationId)
         }
+        repository.updateStation(station)
     }
 
     override fun reinitialize(stations: List<Station>) {

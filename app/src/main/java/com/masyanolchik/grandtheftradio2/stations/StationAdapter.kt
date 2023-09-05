@@ -105,18 +105,12 @@ class StationAdapter(
                     } else {
                         R.drawable.favorite_borderless
                     }
+
                     trailingImageButton.setImageDrawable(AppCompatResources.getDrawable(view.context, trailingIcon))
                     trailingImageButton.setOnClickListener {
-                        stationsTreeItem.favorite = !stationsTreeItem.favorite
                         onTrailingButtonClickCallback.invoke(
                             stationsTreeItem,
                         )
-                        val icon = if(stationsTreeItem.favorite) {
-                            R.drawable.favorite
-                        } else {
-                            R.drawable.favorite_borderless
-                        }
-                        trailingImageButton.setImageDrawable(AppCompatResources.getDrawable(view.context, icon))
                     }
                 } else {
                     throw throw RuntimeException("Unknown item provided to ${this::class.simpleName}")
@@ -187,7 +181,7 @@ class StationAdapter(
         override fun areContentsTheSame(
             oldItem: StationsTreeItem,
             newItem: StationsTreeItem
-        ): Boolean = oldItem.equals(newItem)
+        ): Boolean = oldItem == newItem
 
     }
 

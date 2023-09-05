@@ -22,6 +22,13 @@ class FakeStationRepositoryImpl: StationsRepository {
 
     }
 
+    override fun updateStation(station: Station) {
+        with(stationsList) {
+            val prevPos = indexOf(first{ station.id == it.id })
+            removeAt(prevPos)
+            add(prevPos, station)
+        }
+    }
     override fun nukeDatabase(): Flow<Result<Nothing>> {
         return if(isThrowingErrors) {
             flowOf(Result.Error(Exception()))

@@ -6,6 +6,7 @@ import com.masyanolchik.grandtheftradio2.domain.Result
 
 interface StationsRepository {
     fun saveStations(stations: List<Station>): Flow<Result<Nothing>>
+    fun updateStation(station: Station)
     fun nukeDatabase(): Flow<Result<Nothing>>
     fun getAllStations(): Flow<Result<List<Station>>>
 }

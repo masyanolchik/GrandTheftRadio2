@@ -96,7 +96,9 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     }
 
     private fun onTrailingTileIconClick(station: Station) {
-        stationPresenter.updateStation(station)
+        stationPresenter.updateStation(station.apply {
+            favorite = !favorite
+        })
     }
 
     private fun initializeController() {
@@ -140,6 +142,7 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     override fun updateList(listItems: List<StationsTreeItem>) {
         requireActivity().runOnUiThread {
             stationAdapter.submitList(listItems)
+            stationAdapter.notifyDataSetChanged()
         }
     }
 

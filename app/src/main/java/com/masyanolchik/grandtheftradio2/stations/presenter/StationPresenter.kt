@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class StationPresenter(
     private var stationContractModel: StationContract.Model,
@@ -35,6 +34,15 @@ class StationPresenter(
     override fun updateStation(station: Station) {
         coroutineScope.launch {
             stationContractModel.updateStation(station)
+            stationContractModel.getItemsForEra(station.game.universe)
+                .flowOn(uiDispatcher)
+                .collectLatest {
+                    stationContractView?.hideLoadingProgress()
+                    when(it) {
+                        is Result.Success -> stationContractView?.updateList(it.data)
+                        else -> stationContractView?.showErrorScreen()
+                    }
+                }
         }
     }
 

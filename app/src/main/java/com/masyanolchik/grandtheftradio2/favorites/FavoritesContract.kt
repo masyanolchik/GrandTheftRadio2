@@ -1,6 +1,7 @@
 package com.masyanolchik.grandtheftradio2.favorites
 
 import com.masyanolchik.grandtheftradio2.domain.Result
+import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
 import kotlinx.coroutines.flow.Flow
 
@@ -18,6 +19,8 @@ interface FavoritesContract {
     interface Presenter {
         fun prepareFavoriteStations()
 
+        fun updateStation(station: Station)
+
         fun setView(view: View)
 
         fun onDetach()
@@ -25,5 +28,7 @@ interface FavoritesContract {
 
     interface Model {
         fun getFavoriteItems(): Flow<Result<List<StationsTreeItem>>>
+
+        suspend fun updateStation(station: Station)
     }
 }
