@@ -646,5 +646,240 @@
                 "msTotalLength": "448758"
             }
         ]
+    },
+    {
+        "id": "9",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 1",
+        "favorite": "false",
+        "genre": "Rock",
+        "tags": [
+            {
+                "tagName": "Rock"
+            },
+            {
+                "tagName": "Dance"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "45",
+                "artist": "Elvis Presley",
+                "title": "Blue Suede Shoes",
+                "msOffset": "0",
+                "link": "GNdg0gu1JXc",
+                "radioName": "Song 1",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "175697"
+            }
+        ]
+    },
+    {
+        "id": "10",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 2",
+        "favorite": "false",
+        "genre": "Unknown",
+        "tags": [
+            {
+                "tagName": "Unknown"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "46",
+                "artist": "GTA1 GBC",
+                "title": "Car Song 2",
+                "msOffset": "0",
+                "link": "DPgS_48iSN4",
+                "radioName": "Song 2",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "142117"
+            }
+        ]
+    },
+    {
+        "id": "11",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 3",
+        "favorite": "false",
+        "genre": "Unknown",
+        "tags": [
+            {
+                "tagName": "Unknown"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "47",
+                "artist": "GTA1 GBC",
+                "title": "Car Song 3",
+                "msOffset": "0",
+                "link": "YnLsUvJTq90",
+                "radioName": "Song 3",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "119562"
+            }
+        ]
+    },
+    {
+        "id": "11",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 4",
+        "favorite": "false",
+        "genre": "Unknown",
+        "tags": [
+            {
+                "tagName": "Unknown"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "48",
+                "artist": "GTA1 GBC",
+                "title": "Car Song 4",
+                "msOffset": "0",
+                "link": "Pailqku074c",
+                "radioName": "Song 4",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "99736"
+            }
+        ]
+    },
+    {
+        "id": "13",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 5",
+        "favorite": "false",
+        "genre": "Rock",
+        "tags": [
+            {
+                "tagName": "Rock"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "50",
+                "artist": "Elvis Presley",
+                "title": "Jailhouse Rock",
+                "msOffset": "0",
+                "link": "Sf7JKYvYc2E",
+                "radioName": "Song 5",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "133878"
+            }
+        ]
+    },
+    {
+        "id": "14",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 6",
+        "favorite": "false",
+        "genre": "Unknown",
+        "tags": [
+            {
+                "tagName": "Unknown"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "51",
+                "artist": "GTA1 GBC",
+                "title": "Car Song 6",
+                "msOffset": "0",
+                "link": "6AgiR2zdkUk",
+                "radioName": "Song 6",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "117394"
+            }
+        ]
+    },
+    {
+        "id": "15",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 7",
+        "favorite": "false",
+        "genre": "Unknown",
+        "tags": [
+            {
+                "tagName": "Unknown"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "52",
+                "artist": "GTA1 GBC",
+                "title": "Car Song 7",
+                "msOffset": "0",
+                "link": "PsFixgSYBaE",
+                "radioName": "Song 7",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "178730"
+            }
+        ]
+    },
+    {
+        "id": "16",
+        "game": {
+            "id": "3",
+            "gameName": "Grand Theft Auto (GBC)",
+            "universe": "2D"
+        },
+        "name": "Car Song 8",
+        "favorite": "false",
+        "genre": "Unknown",
+        "tags": [
+            {
+                "tagName": "Unknown"
+            }
+        ],
+        "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+        "songs": [
+            {
+                "id": "53",
+                "artist": "GTA1 GBC",
+                "title": "Car Song 8",
+                "msOffset": "0",
+                "link": "6GiuxW_rPl4",
+                "radioName": "Song 8",
+                "picLink": "https://images.emulatorgames.net/gameboy-color/grand-theft-auto.webp",
+                "msTotalLength": "47912"
+            }
+        ]
     }
 ]
