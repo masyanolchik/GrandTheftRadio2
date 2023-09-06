@@ -1,11 +1,11 @@
-package com.masyanolchik.grandtheftradio2.stations
+package com.masyanolchik.grandtheftradio2.favorites
 
 import com.masyanolchik.grandtheftradio2.domain.Result
 import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
 import kotlinx.coroutines.flow.Flow
 
-interface StationContract {
+interface FavoritesContract {
     interface View {
         fun showLoadingProgress()
 
@@ -17,7 +17,7 @@ interface StationContract {
     }
 
     interface Presenter {
-        fun prepareItemsForEra(eraName: String)
+        fun prepareFavoriteStations()
 
         fun updateStation(station: Station)
 
@@ -27,7 +27,7 @@ interface StationContract {
     }
 
     interface Model {
-        fun getItemsForEra(eraName: String): Flow<Result<List<StationsTreeItem>>>
+        fun getFavoriteItems(): Flow<Result<List<StationsTreeItem>>>
 
         suspend fun updateStation(station: Station)
     }

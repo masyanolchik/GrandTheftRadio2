@@ -19,18 +19,16 @@ data class LocalSong(
     val msTotalLength: Long,
 )
 
-fun LocalSongWithAdditionalAttributes.toDomain() =
+fun LocalSong.toDomain() =
     Song(
-        id = localSong.songId,
-        prevSongId = prevNextSongs.prevSongId,
-        nextSongId = prevNextSongs.nextSongId,
-        artist = localSong.artist,
-        title = localSong.title,
-        msOffset = localSong.msOffset,
-        link = localSong.link,
-        radioName = localSong.radioName,
-        picLink = localSong.picLink,
-        msTotalLength = localSong.msTotalLength,
+        id = songId,
+        artist = artist,
+        title = title,
+        msOffset = msOffset,
+        link = link,
+        radioName = radioName,
+        picLink = picLink,
+        msTotalLength = msTotalLength,
     )
 
 fun Song.fromDomain() =

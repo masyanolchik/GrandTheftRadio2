@@ -10,6 +10,7 @@ import kotlin.math.ceil
 data class Station (
     val id: Int,
     val game: Game,
+    var favorite: Boolean = false,
     val name: String,
     val genre: String,
     val picLink: String,

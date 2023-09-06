@@ -1,13 +1,13 @@
 package com.masyanolchik.grandtheftradio2.stations.presenter
 
 import com.masyanolchik.grandtheftradio2.domain.Result
+import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stations.StationContract
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class StationPresenter(
     private var stationContractModel: StationContract.Model,
@@ -20,6 +20,21 @@ class StationPresenter(
         coroutineScope.launch {
             stationContractModel
                 .getItemsForEra(eraName)
+                .flowOn(uiDispatcher)
+                .collectLatest {
+                    stationContractView?.hideLoadingProgress()
+                    when(it) {
+                        is Result.Success -> stationContractView?.updateList(it.data)
+                        else -> stationContractView?.showErrorScreen()
+                    }
+                }
+        }
+    }
+
+    override fun updateStation(station: Station) {
+        coroutineScope.launch {
+            stationContractModel.updateStation(station)
+            stationContractModel.getItemsForEra(station.game.universe)
                 .flowOn(uiDispatcher)
                 .collectLatest {
                     stationContractView?.hideLoadingProgress()

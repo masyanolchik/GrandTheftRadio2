@@ -47,7 +47,7 @@ class StationsTreeImpl(
     }
 
 
-    private inner class StationsTreeNode(val item: StationsTreeItem) {
+    private inner class StationsTreeNode(var item: StationsTreeItem) {
         private val children: MutableList<StationsTreeItem> = ArrayList()
 
         fun addChild(childID: String) {
@@ -56,6 +56,10 @@ class StationsTreeImpl(
 
         fun getChildren(): List<StationsTreeItem> {
             return ImmutableList.copyOf(children)
+        }
+
+        fun removeChild(childID: String) {
+            children.removeIf { it is Station && (STATION_PREFIX + it.id == childID) }
         }
 
     }
@@ -73,6 +77,22 @@ class StationsTreeImpl(
     override suspend fun getChildren(id: String): List<StationsTreeItem> {
         initializationJob.join()
         return treeNodes[id]?.getChildren()?: emptyList()
+    }
+
+    override suspend fun updateStation(station: Station) {
+        val stationId = STATION_PREFIX + station.id
+        val stationTreeNode = treeNodes[stationId]
+        if(stationTreeNode != null) {
+            stationTreeNode.item = station
+        } else {
+            treeNodes[stationId] = StationsTreeNode(station)
+        }
+        if(station.favorite) {
+            treeNodes[ERA_ID + FAVORITE_TAB_TITLE]?.addChild(stationId)
+        } else {
+            treeNodes[ERA_ID + FAVORITE_TAB_TITLE]?.removeChild(stationId)
+        }
+        repository.updateStation(station)
     }
 
     override fun reinitialize(stations: List<Station>) {
@@ -109,7 +129,10 @@ class StationsTreeImpl(
             })
 
         val stationsByUniverse = stations.groupBy { it.game.universe }
-        val universes = stationsByUniverse.keys.sorted()
+        val universes = stationsByUniverse.keys.sorted().toMutableList()
+            .apply {
+              add(0,FAVORITE_TAB_TITLE)
+            }
         universes.forEach {
             val mediaId = ERA_ID + it
             val artworkResource = when(it) {
@@ -158,9 +181,13 @@ class StationsTreeImpl(
 
        stations.groupBy { it.game }.forEach { gameStationsPair ->
            gameStationsPair.value.forEach {
-               val parentId = GAME_PREFIX+it.game.id
+               val parentId = GAME_PREFIX + it.game.id
                val stationId = STATION_PREFIX + it.id
-               treeNodes[stationId] = StationsTreeNode(it)
+               val stationsTreeNode = StationsTreeNode(it)
+               treeNodes[stationId] = stationsTreeNode
+               if(it.favorite) {
+                   treeNodes[ERA_ID+ FAVORITE_TAB_TITLE]?.addChild(stationId)
+               }
                it.songs.forEach { song ->
                    val songId = SONG_PREFIX + song.id
                    treeNodes[songId] = StationsTreeNode(song)
@@ -173,5 +200,6 @@ class StationsTreeImpl(
 
     companion object {
         private const val ROOT_TITLE = "Root folder"
+        const val FAVORITE_TAB_TITLE = "Favorite"
     }
 }

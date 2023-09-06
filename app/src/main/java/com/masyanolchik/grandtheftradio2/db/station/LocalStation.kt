@@ -25,6 +25,7 @@ data class LocalStation(
     @PrimaryKey val stationId: Int,
     val gameId: Int,
     val name: String,
+    val favorite: Boolean,
     val genre: String,
     val picLink: String,
 )
@@ -33,6 +34,7 @@ fun LocalStationWithAdditionalAttributes.toDomain() =
     Station(
         id = localStation.stationId,
         game = localGame.toDomain(),
+        favorite = localStation.favorite,
         name = localStation.name,
         genre = localStation.genre,
         picLink = localStation.picLink,
@@ -45,5 +47,6 @@ fun Station.fromDomain() =
         gameId = game.id,
         name = name,
         genre = genre,
-        picLink = picLink
+        picLink = picLink,
+        favorite = favorite
     )
