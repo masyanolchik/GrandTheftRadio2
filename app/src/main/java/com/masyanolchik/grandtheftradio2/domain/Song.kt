@@ -1,9 +1,6 @@
 package com.masyanolchik.grandtheftradio2.domain
 
-import android.content.Context
 import android.net.Uri
-import android.util.Log
-import android.util.SparseArray
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import com.github.kotvertolet.youtubejextractor.YoutubeJExtractor
@@ -42,7 +39,7 @@ data class Song(
     }
 
     companion object {
-        fun getStationCorrectLink(song: Song): String {
+        fun getSongCorrectLink(song: Song): String {
             return if (song.link.contains("http")) {
                 song.link
             } else {

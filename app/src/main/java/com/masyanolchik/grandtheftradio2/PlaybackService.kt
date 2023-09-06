@@ -191,15 +191,19 @@ import org.koin.android.ext.android.inject
                         add(firstSong)
                         addAll(newChildren.takeLast(newChildren.size - 1 - position))
                         addAll(newChildren.take(position))
-                    }.map { it.toMediaItem() }.toMutableList()
+                    }.map { it.toMediaItem().buildUpon().setUri(Song.getSongCorrectLink(it)).build() }.toMutableList()
                 } else {
                     buildList {
                         if(upcomingMediaItem != null) {
-                            add(upcomingMediaItem.toMediaItem())
+                            add(upcomingMediaItem
+                                .toMediaItem()
+                                .buildUpon()
+                                .setUri(Song.getSongCorrectLink(upcomingMediaItem as Song))
+                                .build()
+                            )
                         }
                     }.toMutableList()
                 }
-
             }
 
             return currentOrderedNewChildrenDeferred.asListenableFuture()

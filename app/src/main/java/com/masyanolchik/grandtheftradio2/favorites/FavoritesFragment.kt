@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.common.util.concurrent.ListenableFuture
+import com.masyanolchik.grandtheftradio2.MediaControllerHost
 import com.masyanolchik.grandtheftradio2.PlaybackService
 import com.masyanolchik.grandtheftradio2.R
 import com.masyanolchik.grandtheftradio2.domain.Game
@@ -88,9 +91,7 @@ class FavoritesFragment : Fragment(), FavoritesContract.View, KoinScopeComponent
     }
 
     private fun onStationTileClick(station: Station) {
-        controller?.clearMediaItems()
-        controller?.addMediaItems(station.songs.map { it.toMediaItem() })
-        controller?.play()
+        favoritesPresenter.prepareStationSongs(station)
     }
 
     private fun onTrailingTileIconClick(station: Station) {
@@ -133,6 +134,27 @@ class FavoritesFragment : Fragment(), FavoritesContract.View, KoinScopeComponent
             progressBar.isVisible = false
         }
 
+    }
+
+    override fun playMediaItems(mediaItems: List<MediaItem>, startOffsetMs: Long) {
+        requireActivity().runOnUiThread {
+            val hostActivity = requireActivity()
+            if(hostActivity is MediaControllerHost) {
+                val controller = hostActivity.getHostMediaController()
+                controller?.clearMediaItems()
+                controller?.addMediaItems(mediaItems)
+                val seekListener = object : Player.Listener {
+                    override fun onIsPlayingChanged(isPlaying: Boolean) {
+                        if(isPlaying) {
+                            controller?.seekTo(startOffsetMs)
+                            controller?.removeListener(this)
+                        }
+                    }
+                }
+                controller?.addListener(seekListener)
+                controller?.play()
+            }
+        }
     }
 
     override fun updateList(listItems: List<StationsTreeItem>) {

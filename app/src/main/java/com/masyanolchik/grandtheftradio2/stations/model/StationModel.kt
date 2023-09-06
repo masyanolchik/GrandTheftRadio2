@@ -11,7 +11,7 @@ import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem.Companion.STATION_PREFIX
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.lang.Exception
+import kotlin.Exception
 
 class StationModel(private val stationsTree: StationsTree): StationContract.Model {
     override fun getItemsForEra(eraName: String): Flow<Result<List<StationsTreeItem>>> {

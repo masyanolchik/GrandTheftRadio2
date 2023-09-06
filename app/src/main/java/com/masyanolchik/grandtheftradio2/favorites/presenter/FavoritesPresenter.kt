@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import com.masyanolchik.grandtheftradio2.domain.Result
+import com.masyanolchik.grandtheftradio2.domain.Song
+import kotlinx.coroutines.Job
 
 class FavoritesPresenter(
     private var favoritesContractModel: FavoritesContract.Model,
@@ -15,6 +17,8 @@ class FavoritesPresenter(
     private val uiDispatcher: CoroutineDispatcher
 ): FavoritesContract.Presenter {
     private var favoritesContractView: FavoritesContract.View? = null
+    private var songsForStationJob: Job? = null
+
     override fun prepareFavoriteStations() {
         favoritesContractView?.showLoadingProgress()
         coroutineScope.launch {
@@ -48,6 +52,22 @@ class FavoritesPresenter(
 
     override fun setView(view: FavoritesContract.View) {
         favoritesContractView = view
+    }
+
+    override fun prepareStationSongs(station: Station) {
+        songsForStationJob?.cancel()
+        songsForStationJob = coroutineScope.launch {
+            val (songs, offset) = station.getSongsListWithCurrentAtTheTopAndSeekPosition(System.currentTimeMillis())
+            favoritesContractView?.playMediaItems(
+                songs.map {
+                    it.toMediaItem()
+                        .buildUpon()
+                        .setUri(Song.getSongCorrectLink(it))
+                        .build()
+                },
+                offset
+            )
+        }
     }
 
     override fun onDetach() {

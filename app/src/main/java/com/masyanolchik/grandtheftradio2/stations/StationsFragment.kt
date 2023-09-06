@@ -22,6 +22,7 @@ import com.google.common.util.concurrent.MoreExecutors
 import com.masyanolchik.grandtheftradio2.MediaControllerHost
 import com.masyanolchik.grandtheftradio2.PlaybackService
 import com.masyanolchik.grandtheftradio2.R
+import com.masyanolchik.grandtheftradio2.domain.Song
 import com.masyanolchik.grandtheftradio2.domain.Station
 import com.masyanolchik.grandtheftradio2.stationstree.StationsTreeItem
 import org.koin.android.scope.createScope
@@ -88,28 +89,7 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
     }
 
     private fun onStationTileClick(station: Station) {
-        val hostActivity = requireActivity()
-        if(hostActivity is MediaControllerHost) {
-            val controller = hostActivity.getHostMediaController()
-            controller?.clearMediaItems()
-            val (songs, offset) = station.getSongsListWithCurrentAtTheTopAndSeekPosition(System.currentTimeMillis())
-            controller?.addMediaItems(
-                songs.map {
-                    it.toMediaItem()
-                }
-            )
-            val seekListener = object : Player.Listener {
-                override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    if(isPlaying) {
-                        controller?.seekTo(offset)
-                        controller?.removeListener(this)
-                    }
-                }
-            }
-            controller?.addListener(seekListener)
-            controller?.play()
-        }
-
+        stationPresenter.prepareStationSongs(station)
     }
 
     private fun onTrailingTileIconClick(station: Station) {
@@ -144,6 +124,27 @@ class StationsFragment : Fragment(), StationContract.View, KoinScopeComponent {
             progressBar.isVisible = false
         }
 
+    }
+
+    override fun playMediaItems(mediaItems: List<MediaItem>, startOffsetMs: Long) {
+        requireActivity().runOnUiThread {
+            val hostActivity = requireActivity()
+            if(hostActivity is MediaControllerHost) {
+                val controller = hostActivity.getHostMediaController()
+                controller?.clearMediaItems()
+                controller?.addMediaItems(mediaItems)
+                val seekListener = object : Player.Listener {
+                    override fun onIsPlayingChanged(isPlaying: Boolean) {
+                        if(isPlaying) {
+                            controller?.seekTo(startOffsetMs)
+                            controller?.removeListener(this)
+                        }
+                    }
+                }
+                controller?.addListener(seekListener)
+                controller?.play()
+            }
+        }
     }
 
     override fun updateList(listItems: List<StationsTreeItem>) {

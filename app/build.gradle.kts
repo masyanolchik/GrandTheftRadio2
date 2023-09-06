@@ -50,7 +50,7 @@ android {
 
 dependencies {
     val navVersion = "2.6.0"
-    val gsonVersion = "2.10.1"
+    val gsonVersion = "2.8.6"
     val koinVersion = "3.4.3"
     val media3Version = "1.1.0"
     val roomVersion = "2.5.1"
@@ -62,6 +62,7 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
     implementation("androidx.core:core-ktx:1.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
